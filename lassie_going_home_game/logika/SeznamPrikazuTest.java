@@ -1,6 +1,7 @@
 package logika;
 
-import org.junit.After;
+import logika.prikazy.PrikazJdi;
+import logika.prikazy.PrikazKonec;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;

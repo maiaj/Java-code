@@ -1,4 +1,8 @@
-package logika;
+package logika.prikazy;
+
+import logika.HerniPlan;
+import logika.Pes;
+import logika.Pruchod;
 
 public class PrikazPsiOci implements IPrikaz {
     private static final String NAZEV = "oci";

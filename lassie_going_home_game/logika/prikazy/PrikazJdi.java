@@ -1,9 +1,13 @@
-package logika;
+package logika.prikazy;
+
+import logika.HerniPlan;
+import logika.Prostor;
+import logika.Pruchod;
 
 /**
  * Třída PrikazJdi implementuje pro hru příkaz jdi.
  */
-class PrikazJdi implements IPrikaz {
+public class PrikazJdi implements IPrikaz {
     private static final String NAZEV = "jdi";
     private HerniPlan plan;
 

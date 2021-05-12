@@ -1,4 +1,6 @@
-package logika;
+package logika.prikazy;
+
+import logika.HerniPlan;
 
 public class PrikazSeber implements IPrikaz {
     private static final String NAZEV = "seber";

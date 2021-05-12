@@ -1,4 +1,6 @@
-package logika;
+package logika.prikazy;
+
+import logika.Hra;
 
 /**
  *  Třída PrikazKonec implementuje pro hru příkaz konec.
@@ -9,7 +11,7 @@ package logika;
  *  
  */
 
-class PrikazKonec implements IPrikaz {
+public class PrikazKonec implements IPrikaz {
 
     private static final String NAZEV = "konec";
 

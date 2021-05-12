@@ -1,5 +1,7 @@
 package logika;
 
+import logika.prikazy.*;
+
 /**
  * Třída Hra - třída představující logiku adventury.
  * Toto je hlavní třída  logiky aplikace.  Tato třída vytváří instanci třídy HerniPlan, která inicializuje mistnosti hry
@@ -89,7 +91,7 @@ public class Hra implements IHra {
      *
      * @param konecHry hodnota false= konec hry, true = hra pokračuje
      */
-    void setKonecHry(boolean konecHry) {
+    public void setKonecHry(boolean konecHry) {
         this.konecHry = konecHry;
     }
 

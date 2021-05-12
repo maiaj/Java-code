@@ -1,5 +1,7 @@
 package logika;
 
+import logika.prikazy.IPrikaz;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,7 +17,7 @@ import java.util.Map;
  * @author Michael Kolling, Lubos Pavlicek, Jarmila Pavlickova
  * @version pro školní rok 2016/2017
  */
-class SeznamPrikazu {
+public class SeznamPrikazu {
     // mapa pro uložení přípustných příkazů
     private Map<String, IPrikaz> mapaSPrikazy;
 

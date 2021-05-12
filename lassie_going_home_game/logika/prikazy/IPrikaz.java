@@ -1,6 +1,6 @@
-package logika;
+package logika.prikazy;
 
-interface IPrikaz {
+public interface IPrikaz {
 
     /**
      * Metoda pro provedení příkazu ve hře.
