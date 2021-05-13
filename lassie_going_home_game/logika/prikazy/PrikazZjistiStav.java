@@ -13,10 +13,7 @@ public class PrikazZjistiStav implements IPrikaz {
 
     @Override
     public String provedPrikaz(String... parametry) {
-        int stavJidla = plan.getPes().zjistiStav("jidlo");
-        int stavVody = plan.getPes().zjistiStav("voda");
-        String novyText = "Máš " + stavJidla + " jednotek jídla a " + stavVody + " jednotek vody."; // TODO: staw wiecy a aktualny prostor
-        return novyText;
+        return "Jsi v prostoru " + plan.getAktualniProstor().getNazev() + ". Máš " + plan.getPes().zjistiStavJidla() + " jednotek jídla a " + plan.getPes().zjistiStavVody() + " jednotek vody."; // TODO: staw wiecy a aktualny prostor
     }
 
     @Override

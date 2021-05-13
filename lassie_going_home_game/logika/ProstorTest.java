@@ -48,8 +48,8 @@ public class ProstorTest
      */
     @Test
     public  void testLzeProjit() {		
-        Prostor prostor1 = new Prostor("hala", "vstupní hala budovy VŠE na Jižním městě", false, false, false, false);
-        Prostor prostor2 = new Prostor("bufet", "bufet, kam si můžete zajít na svačinku", true, true, false, false);
+        Prostor prostor1 = new Prostor("hala", "vstupní hala budovy VŠE na Jižním městě", false, false, false);
+        Prostor prostor2 = new Prostor("bufet", "bufet, kam si můžete zajít na svačinku", true, true, false);
         prostor1.setPruchod(new Pruchod(true, true, prostor2));
         prostor2.setPruchod(new Pruchod(true, true, prostor1));
         assertEquals(prostor2, prostor1.vratMoznyPruchod("bufet"));

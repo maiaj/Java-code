@@ -18,11 +18,10 @@ public class PrikazHrabej implements IPrikaz {
             plan.getAktualniProstor().setJeHrabatelny(false);
             return "Vyhrabal jsi mrtvou veverku. Pochutnej si. " + plan.getAktualniProstor().dlouhyPopis();
         } else {
-            for (Pruchod pruchod : plan.getAktualniProstor().getTajneVychody()) {
-                if (pruchod.isJeHrabatelny() == true) {
-                    pruchod.setJeViditelny(true);
+            for (Pruchod pruchod : plan.getAktualniProstor().getTajnePruchody()) {
+                if (pruchod.prohrabat()) {
                     plan.getAktualniProstor().setPruchod(pruchod);
-                    return "Podařilo se ti vyhrabat dost velkou díru. Dobrá práce! " + plan.getAktualniProstor().dlouhyPopis();
+                    return "Podařilo se ti vyhrabat dost velkou díru. Dobrá práce! " + "\n" + plan.getAktualniProstor().popisVychodu();
                 }
             }
         }

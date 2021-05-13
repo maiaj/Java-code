@@ -13,18 +13,25 @@ public class PrikazSeber implements IPrikaz {
     @Override
     public String provedPrikaz(String... parametry) {
           if (parametry.length == 0) {
-            // pokud chybí druhé slovo, tak ....
             return "Co mám sebrat? Zadej název věci, která je v prostoru.";
         } else {
             String vecVProstoru = parametry[0];
             if (parametry.length == 1 && vecVProstoru.equals("klacek") && plan.getAktualniProstor().obsahujeVec(vecVProstoru)) {
-                plan.getPes().pridejKlacek();
-                plan.getAktualniProstor().odeberVec(parametry[0]);
-                return plan.getPes().pridejKlacek();
+                if (plan.getPes().isMaKlacek() == true) {
+                    return "Už jeden klacek máš.";
+                }
+                else {
+                    plan.getPes().setMaKlacek(true);
+                    return "Sebral jsi klacek.";
+                }
             } else if (parametry.length == 1 && vecVProstoru.equals("obojek") && plan.getAktualniProstor().obsahujeVec(vecVProstoru)) {
-                plan.getPes().pridejObojek();
-                plan.getAktualniProstor().odeberVec(parametry[0]);
-                return plan.getPes().pridejObojek();            }
+                if (plan.getPes().isMaObojek() == true) {
+                    return "Obojek už máš.";
+                }
+                else {
+                    plan.getPes().setMaObojek(true);
+                    return "Sebral jsi obojek.";
+                }          }
         }
         return "Tento předmět neznám.";
     }

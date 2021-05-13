@@ -3,7 +3,7 @@ package logika;
 public class Postava {
     private String jmeno;
     private String popis;
-    private boolean fungujiPsiOci;
+    private boolean fungujiPsiOci; // TODO: przerobic na enum
     private boolean odtajnujeVychod;
     private boolean davaJidloAVodu;
     private boolean zavezeDoCile;

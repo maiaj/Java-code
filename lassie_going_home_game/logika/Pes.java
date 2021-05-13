@@ -3,6 +3,8 @@ package logika;
 public class Pes {
     private int jidlo;
     private int voda;
+    private int maxJidlo = 10;
+    private int maxVoda = 10;
     private boolean maKlacek;
     private boolean maObojek;
 
@@ -13,6 +15,14 @@ public class Pes {
         this.maObojek = maObojek;
     }
 
+    public int getMaxJidlo() {
+        return maxJidlo;
+    }
+
+    public int getMaxVoda() {
+        return maxVoda;
+    }
+
     public boolean isMaKlacek() {
         return maKlacek;
     }
@@ -21,46 +31,44 @@ public class Pes {
         return maObojek;
     }
 
-    public int zjistiStav(String string) { // TODO: 2 metody na jedzyni a wode osobno
-        int aktualniStav = 0;
+    public int zjistiStavJidla() {
+        return this.jidlo;
+    }
 
-        if (string == "jidlo") {
-            aktualniStav = this.jidlo;
-        }
-        if (string == "voda") {
-            aktualniStav = this.voda;
-        }
-        return aktualniStav;
+    public int zjistiStavVody() {
+        return this.voda;
     }
 
     public void pridejJidlo(int jednotka) {
-        this.jidlo = jidlo + jednotka;
-    }
-
-    public void uberJidlo() {
-        this.jidlo--;
-    }
-
-    public void pridejVodu(int jednotka) {
-        this.voda = voda + jednotka;
-    }
-
-    public void uberVodu() {
-        this.voda--;
-    }
-
-    public String pridejKlacek() {
-        if (this.maKlacek == true) {
-            return "Už jeden klacek máš.";
-        } else {
-            this.maKlacek = true;
-            return "Sebral jsi klacek.";
+        if (this.jidlo <= this.maxJidlo) {
+            this.jidlo = jidlo + jednotka;
         }
     }
 
-    public String pridejObojek() {
-        this.maObojek = true;
-        return "Sebral jsi obojek.";
+    public void uberJidlo() {
+        if (this.jidlo >= 0) {
+            this.jidlo--;
+        }
+    }
+
+    public void pridejVodu(int jednotka) {
+        if (this.voda <= this.maxVoda) {
+            this.voda = voda + jednotka;
+        }
+    }
+
+    public void uberVodu(int jednotka) {
+        if (this.voda >= 0) {
+            this.voda = voda - jednotka;
+        }
+    }
+
+    public void setMaKlacek(boolean maKlacek) {
+        this.maKlacek = maKlacek;
+    }
+
+    public void setMaObojek(boolean maObojek) {
+        this.maObojek = maObojek;
     }
 }
 

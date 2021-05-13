@@ -6,9 +6,6 @@ import logika.Hra;
  *  Třída PrikazKonec implementuje pro hru příkaz konec.
  *  Tato třída je součástí jednoduché textové hry.
  *  
- *@author     Jarmila Pavlickova
- *@version    pro školní rok 2016/2017
- *  
  */
 
 public class PrikazKonec implements IPrikaz {
@@ -36,11 +33,11 @@ public class PrikazKonec implements IPrikaz {
     @Override
     public String provedPrikaz(String... parametry) {
         if (parametry.length > 0) {
-            return "Ukončit co? Nechápu, proč jste zadal druhé slovo.";
+            return "Ukončit co? Nechápu, proč jsi zadal druhé slovo.";
         }
         else {
             hra.setKonecHry(true);
-            return "hra ukončena příkazem konec";
+            return "Hra ukončena příkazem konec.";
         }
     }
 

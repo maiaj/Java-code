@@ -6,9 +6,6 @@ import logika.SeznamPrikazu;
  *  Třída PrikazNapoveda implementuje pro hru příkaz napoveda.
  *  Tato třída je součástí jednoduché textové hry.
  *  
- *@author     Jarmila Pavlickova, Luboš Pavlíček
- *@version    pro školní rok 2016/2017
- *  
  */
 public class PrikazNapoveda implements IPrikaz {
     
@@ -35,8 +32,8 @@ public class PrikazNapoveda implements IPrikaz {
      */
     @Override
     public String provedPrikaz(String... parametry) {
-        return "Tvým úkolem je dovést Červenou Karkulku z domečku\n"
-        + "až k babičce, která bydlí v chaloupce za lesem.\n"
+        return "Jsi kólie Lassie a tvým úkolem je dostat se domů\n"
+        + "po cestě bys měl jíst a pít, abys měl dost síly jít dál.\n"
         + "\n"
         + "Můžeš zadat tyto příkazy:\n"
         + platnePrikazy.vratNazvyPrikazu();

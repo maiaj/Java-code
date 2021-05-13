@@ -19,11 +19,10 @@ public class Prostor {
     private Boolean jeTamVoda;
     private Boolean jeTamJidlo;
     private Boolean jeHrabatelny;
-    private Boolean jeTamClovek; // TODO: nima trzeba, uz tu mom postawe
-    private Set<Pruchod> vychody;   // obsahuje viditelné průchody
-    private Set<Pruchod> tajneVychody;   // obsahuje tajné průchody
+    private Set<Pruchod> pruchody;
     private Map<String, Vec> veci;
     private Postava postava;
+    private boolean jeOznaceny = false;
 
     /**
      * Vytvoření prostoru se zadaným popisem, např. "kuchyň", "hala", "trávník
@@ -33,15 +32,13 @@ public class Prostor {
      *              víceslovný název bez mezer.
      * @param popis Popis prostoru.
      */
-    public Prostor(String nazev, String popis, Boolean jeTamVoda, Boolean jeTamJidlo, Boolean jeHrabatelny, Boolean jeTamClovek) {
+    public Prostor(String nazev, String popis, Boolean jeTamVoda, Boolean jeTamJidlo, Boolean jeHrabatelny) {
         this.nazev = nazev;
         this.popis = popis;
         this.jeTamJidlo = jeTamJidlo;
         this.jeTamVoda = jeTamVoda;
         this.jeHrabatelny = jeHrabatelny;
-        this.jeTamClovek = jeTamClovek;
-        vychody = new HashSet<>();
-        tajneVychody = new HashSet<>();
+        pruchody = new HashSet<>();
         veci = new HashMap<>();
         this.postava = postava;
     }
@@ -56,10 +53,6 @@ public class Prostor {
 
     public Boolean getJeHrabatelny() {
         return jeHrabatelny;
-    }
-
-    public Boolean getJeTamClovek() {
-        return jeTamClovek;
     }
 
     public Postava getPostava() {
@@ -88,15 +81,7 @@ public class Prostor {
      * @param vedlejsi prostor, který sousedi s aktualnim prostorem.
      */
     public void setPruchod(Pruchod vedlejsi) {
-        if (vedlejsi.isJeViditelny()) {
-            vychody.add(vedlejsi);
-        }
-    }
-
-    public void setTajnyPruchod(Pruchod vedlejsiTajny) {
-        if (vedlejsiTajny.isJeViditelny() == false) {
-            tajneVychody.add(vedlejsiTajny);
-        }
+        pruchody.add(vedlejsi);
     }
 
     /**
@@ -173,12 +158,13 @@ public class Prostor {
      *
      * @return Popis východů - názvů sousedních prostorů
      */
-    private String popisVychodu() {
-        String vracenyText = "východy:";
-        if (vychody.isEmpty()) {
+    public String popisVychodu() {
+        String vracenyText = "Východy:";
+        Collection<Pruchod> viditelnePruchody = getViditelnePruchody();
+        if (viditelnePruchody.isEmpty()) {
             vracenyText += " Nejsou zde žádné viditelné východy.";
         } else {
-            for (Pruchod sousedni : vychody) {
+            for (Pruchod sousedni : viditelnePruchody) {
                 vracenyText += " " + sousedni.getCilovyProstor().getNazev();
             }
         }
@@ -195,7 +181,7 @@ public class Prostor {
      * null, pokud prostor zadaného jména není sousedem.
      */
     public Pruchod vratMoznyPruchod(String nazevSouseda) {
-        return vychody
+        return getViditelnePruchody()
                 .stream()
                 .filter(sousedni -> sousedni.getCilovyProstor().getNazev().equals(nazevSouseda))
                 .findFirst()
@@ -211,13 +197,14 @@ public class Prostor {
      * @return Nemodifikovatelná kolekce prostorů (východů), se kterými tento
      * prostor sousedí.
      */
-    public Collection<Pruchod> getVychody() {
-        return Collections.unmodifiableCollection(vychody.stream().filter(pruchod -> pruchod.isJeViditelny()).collect(Collectors.toList()));
+    public Collection<Pruchod> getViditelnePruchody() {
+        return Collections.unmodifiableCollection(pruchody.stream().filter(pruchod -> pruchod.isJeViditelny()).collect(Collectors.toList()));
     }
 
-    public Collection<Pruchod> getTajneVychody() {
-        return Collections.unmodifiableCollection(tajneVychody);
+    public Collection<Pruchod> getTajnePruchody() {
+        return Collections.unmodifiableCollection(pruchody.stream().filter(pruchod -> pruchod.isJeViditelny() == false).collect(Collectors.toList()));
     } // TODO: zmiynic po wzoru getVychody, przemianowac vychod na pruchod
+
 
     public boolean obsahujeVec(String nazev) {
         return veci.containsKey(nazev);
@@ -233,5 +220,13 @@ public class Prostor {
 
     public void setPostava(Postava postava) {
         this.postava = postava;
+    }
+
+    public boolean isJeOznaceny() {
+        return jeOznaceny;
+    }
+
+    public void setJeOznaceny(boolean jeOznaceny) {
+        this.jeOznaceny = jeOznaceny;
     }
 }

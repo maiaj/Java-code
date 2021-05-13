@@ -29,27 +29,33 @@ public class HerniPlan {
      */
     private void zalozProstoryHry() {
         // vytvářejí se jednotlivé prostory
-        Prostor kotec = new Prostor("kotec", "kotec, do kterého tě zavřel farmář. Podlaha kotce je z hlíny.", false, false, false, false);
-        Prostor staj = new Prostor("stáj", "stáj, ve které je miska s vodou, jídlo a tvůj starý obojek. U dveří stáje stojí farmářka.", true, true, false, true);
-        Prostor dvur = new Prostor("dvůr", "dvůr, na kterém je voda a jídlo. Dvůr je ohraničený plotem, kolem kterého se prochází kočka.", true, true, false, false);
-        Prostor cesta = new Prostor("cesta", "cesta.", false, false, false, false);
-        Prostor parkoviste = new Prostor("parkoviště", "parkoviště. U jedenoho z aut stojí člověk.", false, false, false, true);
-        Prostor les1 = new Prostor("les", "hluboký les s pramenem vody", true, true, true, false);
-        Prostor les2 = new Prostor("les", "malý lesík s pár stromy", false, true, true, false);
-        Prostor pole1 = new Prostor("pole", "suché, neúrodné pole, na kterém se dá najít klacek.", false, false, false, false);
-        Prostor pole2 = new Prostor("pole", "suché, neúrodné pole, na kterém se dá najít klacek.", false, false, false, false);
-        Prostor pole3 = new Prostor("pole", "suché, neúrodné pole, na kterém se dá najít klacek.", false, false, false, false);
-        Prostor hospoda = new Prostor("hospoda", "hospoda u lesa. Před vstupem je značka “Psům vstup zakázán”.", false, false, false, true);
-        Prostor staveniste = new Prostor("staveniště", "staveniště, na kterém hoří.", false, false, false, false);
-        Prostor domov = new Prostor("domov", "domov, jsi v cíli, čekají tě zde prémiové psí dobroty, vychlazená voda, měkký pelíšek a hlavně zasloužené vítězství.", false, false, false, false);
+        Prostor kotec = new Prostor("kotec", "kotec, do kterého tě zavřel farmář. Podlaha kotce je z hlíny.", false, false, false);
+        Prostor staj = new Prostor("stáj", "stáj, ve které je miska s vodou, jídlo a tvůj starý obojek. U dveří stáje stojí farmářka.", true, true, false);
+        Prostor dvur = new Prostor("dvůr", "dvůr, na kterém je voda a jídlo. Dvůr je ohraničený plotem, za který je slyšet hluk cesty.", true, true, false);
+        Prostor cesta = new Prostor("cesta", "cesta vde dvěma směry.", false, false, false);
+        Prostor parkoviste = new Prostor("parkoviště", "parkoviště plné aut. U jedenoho z nich stojí člověk.", false, false, false);
+        Prostor les1 = new Prostor("les", "hluboký les s pramenem vody.", true, true, true);
+        Prostor les2 = new Prostor("háj", "malý lesík s pár stromy.", false, true, true);
+        Prostor pole1 = new Prostor("pole", "suché, neúrodné pole, na kterém se dá najít klacek.", false, false, false);
+        Prostor pole2 = new Prostor("louka", "suché, neúrodné pole, na kterém se dá najít klacek.", false, false, false);
+        Prostor pole3 = new Prostor("políčko", "suché, neúrodné pole, na kterém se dá najít klacek.", false, false, false);
+        Prostor hospoda = new Prostor("hospoda", "hospoda u lesa. Za barem stojí hospodská.", false, false, false);
+        Prostor staveniste = new Prostor("staveniště", "staveniště, na kterém hoří. Přes kouř nevidíš co je dál.", false, false, false);
+        Prostor domov = new Prostor("domov", "domov, jsi v cíli, čekají tě zde prémiové psí dobroty, vychlazená voda, měkký pelíšek a hlavně zasloužené vítězství.", false, false, false);
 
 
         // přiřazují se průchody mezi prostory (sousedící prostory)
-        kotec.setTajnyPruchod(new Pruchod(false, true, staj));
+        kotec.setPruchod(new Pruchod(false, true, staj));
+
+        dvur.setPruchod(new Pruchod(true, false, parkoviste));
+        dvur.setPruchod(new Pruchod(true, false, hospoda));
+        dvur.setPruchod(new Pruchod(true, false, staveniste));
+
+
         staj.setPruchod(new Pruchod(true, false, kotec));
-        staj.setTajnyPruchod(new Pruchod(false, false, dvur));
+        staj.setPruchod(new Pruchod(false, false, dvur));
         dvur.setPruchod(new Pruchod(true, false, staj));
-        dvur.setTajnyPruchod(new Pruchod(false, true, cesta));
+        dvur.setPruchod(new Pruchod(false, true, cesta));
         cesta.setPruchod(new Pruchod(true, false, dvur));
         cesta.setPruchod(new Pruchod(true, true, les1));
         cesta.setPruchod(new Pruchod(true, true, parkoviste));
@@ -73,22 +79,22 @@ public class HerniPlan {
         hospoda.setPruchod(new Pruchod(true, false, pole2));
         hospoda.setPruchod(new Pruchod(true, false, les1));
         hospoda.setPruchod(new Pruchod(true, false, pole3));
-        staveniste.setTajnyPruchod(new Pruchod(false, false, domov));
+        staveniste.setPruchod(new Pruchod(true, false, pole3));
+        staveniste.setPruchod(new Pruchod(false, false, domov));
 
         // vkládají se do prostoru věci
-        staj.vlozVec(new Vec("obojek", false));
-        pole1.vlozVec(new Vec("klacek", false));
-        pole2.vlozVec(new Vec("klacek", false));
-        pole3.vlozVec(new Vec("klacek", false));
+        staj.vlozVec(new Vec("obojek", true));
+        pole1.vlozVec(new Vec("klacek", true));
+        pole2.vlozVec(new Vec("klacek", true));
+        pole3.vlozVec(new Vec("klacek", true));
 
-
-        staveniste.vlozVec(new Vec("ohen", true));
+        staveniste.vlozVec(new Vec( "ohen", false));
 
         // vkládají se do prostoru postavy
         staj.setPostava(new Postava("farmarka", "farmářka", true, true, false, false));
-        dvur.setPostava(new Postava("kocka", "kočka", false, true, false, false));
-        parkoviste.setPostava(new Postava("ridic", "řidič", true, true, false, false));
-        hospoda.setPostava(new Postava("hospodska", "hospodská", true, true, false, false));
+        parkoviste.setPostava(new Postava("ridic", "řidič", true, false, false, true));
+        domov.setPostava(new Postava("ridic", "řidič", true, false, false, true));
+        hospoda.setPostava(new Postava("hospodska", "hospodská", true, false, true, false));
 
 
         // určuje se aktuální a počáteční prostor

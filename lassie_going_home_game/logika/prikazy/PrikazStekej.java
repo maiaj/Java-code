@@ -12,10 +12,15 @@ public class PrikazStekej implements IPrikaz {
 
     @Override
     public String provedPrikaz(String... parametry) {
-        plan.setAktualniProstor(plan.getPocatecniProstor());
-        plan.getPes().pridejVodu(2); // TODO: v kotcu nimozesz szczekac, max na jedzyni a wode, a lepszo hlaszka jak se tam wrocisz
-        plan.getPes().pridejJidlo(3);
-        return "Jsi zase na začátku.";
+        if (plan.getAktualniProstor().equals(plan.getPocatecniProstor())) {
+            return "Jsi v kotci. Zaštěkal jsi, ale nic to neudělalo.";
+        }
+        else {
+            plan.setAktualniProstor(plan.getPocatecniProstor());
+            plan.getPes().pridejVodu(2);
+            plan.getPes().pridejJidlo(3);
+            return "Tvoje štěkání přivolalo farmáře, který tě zavezl zpátky na farmu a zavřel tě do kotce. Jsi zase na začátku.";
+        }
     }
 
     @Override

@@ -12,20 +12,21 @@ public class PrikazJez implements IPrikaz {
 
     @Override
     public String provedPrikaz(String... parametry) {
-        String novyText = null;
-        if (plan.getAktualniProstor().getJeTamJidlo() == true) {
-            plan.getPes().pridejJidlo(1);
-            plan.getAktualniProstor().setJeTamJidlo(false);
-            novyText = "Máš " + plan.getPes().zjistiStav("jidlo") + " jednotek jídla.";
+        if (plan.getPes().zjistiStavJidla() < plan.getPes().getMaxJidlo()) {
+            if (plan.getAktualniProstor().getJeTamJidlo() == true) {
+                plan.getPes().pridejJidlo(1);
+                plan.getAktualniProstor().setJeTamJidlo(false);
+                return "Máš " + plan.getPes().zjistiStavJidla() + " jednotek jídla.";
+            } else {
+                return "Tady nic k snědku není.";
+            }
+        } else {
+            return "Jídla už máš dost.";
         }
-        else {
-            novyText = "Tady nic k snědku není.";
-        }
-        return novyText;
     }
 
-    @Override
-    public String getNazev() {
-        return NAZEV;
+        @Override
+        public String getNazev () {
+            return NAZEV;
+        }
     }
-}

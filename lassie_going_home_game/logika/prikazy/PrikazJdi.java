@@ -31,29 +31,35 @@ public class PrikazJdi implements IPrikaz {
      */
     @Override
     public String provedPrikaz(String... parametry) {
-        if (plan.getPes().zjistiStav("jidlo") == 0) {
+        if (plan.getPes().zjistiStavJidla() == 0) {
             return "Nemáš dost jídla. Najez se nebo zaštěkej a vrátíš se do kotce.";
+        } else if (plan.getAktualniProstor().getViditelnePruchody().isEmpty()) {
+            return "Tady není žádný viditelný východ.";
         } else {
             if (parametry.length == 0) {
                 // pokud chybí druhé slovo (sousední prostor), tak ....
                 return "Kam mám jít? Musíš zadat jméno východu";
-            }
-
-            String smer = parametry[0];
-
-            // zkoušíme přejít do sousedního prostoru
-            Pruchod moznyPruchod = plan.getAktualniProstor().vratMoznyPruchod(smer); // TODO: oszetrzic jak gdosi napisze prostor kiery nieegzystuje
-            Prostor sousedniProstor = moznyPruchod.getCilovyProstor();
-
-            if (sousedniProstor == null) {
-                return "Tam se odsud jít nedá!";
             } else {
-                plan.setAktualniProstor(sousedniProstor);
+                String nazevCilovehoProstoru = parametry[0];
+
+
+                Pruchod moznyPruchod = plan.getAktualniProstor().vratMoznyPruchod(nazevCilovehoProstoru);
+
+                if (moznyPruchod == null) {
+                    return "Tam se odsud jít nedá 1!";
+                }
+
+                Prostor cilovyProstor = moznyPruchod.getCilovyProstor();
+
+                plan.setAktualniProstor(cilovyProstor);
                 plan.getPes().uberJidlo();
-                return sousedniProstor.dlouhyPopis();
+                return cilovyProstor.dlouhyPopis();
+
+
             }
         }
     }
+
 
     /**
      * Metoda vrací název příkazu (slovo které používá hráč pro jeho vyvolání)

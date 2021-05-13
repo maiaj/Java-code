@@ -15,6 +15,14 @@ public class Pruchod {
         return jeViditelny;
     }
 
+    public boolean prohrabat() {
+        if (!isJeHrabatelny()) {
+            return false;
+        }
+        jeViditelny = true;
+        return true;
+    }
+
     public boolean isJeHrabatelny() {
         return jeHrabatelny;
     }
