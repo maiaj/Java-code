@@ -8,9 +8,6 @@ import static org.junit.Assert.*;
 /*******************************************************************************
  * Testovací třída HraTest slouží ke komplexnímu otestování
  * třídy Hra
- *
- * @author    Jarmila Pavlíčková
- * @version  pro školní rok 2016/2017
  */
 public class HraTest {
     private Hra hra1;
@@ -52,13 +49,15 @@ public class HraTest {
      */
     @Test
     public void testPrubehHry() {
-        assertEquals("domeček", hra1.getHerniPlan().getAktualniProstor().getNazev());
-        hra1.zpracujPrikaz("jdi les");
+        assertEquals("kotec", hra1.getHerniPlan().getAktualniProstor().getNazev());
+        hra1.zpracujPrikaz("hrabej");
+        hra1.zpracujPrikaz("jdi stáj");
         assertEquals(false, hra1.konecHry());
-        assertEquals("les", hra1.getHerniPlan().getAktualniProstor().getNazev());
-        hra1.zpracujPrikaz("jdi hluboký_les");
+        assertEquals("stáj", hra1.getHerniPlan().getAktualniProstor().getNazev());
+        hra1.zpracujPrikaz("oci");
+        hra1.zpracujPrikaz("jdi dvůr");
         assertEquals(false, hra1.konecHry());
-        assertEquals("hluboký_les", hra1.getHerniPlan().getAktualniProstor().getNazev());
+        assertEquals("dvůr", hra1.getHerniPlan().getAktualniProstor().getNazev());
         hra1.zpracujPrikaz("konec");
         assertEquals(true, hra1.konecHry());
     }

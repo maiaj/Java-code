@@ -3,6 +3,12 @@ package logika.prikazy;
 import logika.HerniPlan;
 import logika.Pruchod;
 
+/*
+Tento prikaz umoznuje psovi hrabat.
+Je mozne ho pouzit v prostoru, ktery je hrabatelny (v tom pripade pes vyhrabe jidlo, ktere muze snist)
+nebo na pruchod, ktery je hrabatelny (v tomto pripade pes odtajnuje pruchod, ktery byl do te doby neviditelny)
+*/
+
 public class PrikazHrabej implements IPrikaz {
     private static final String NAZEV = "hrabej";
     private HerniPlan plan;
@@ -13,7 +19,7 @@ public class PrikazHrabej implements IPrikaz {
 
     @Override
     public String provedPrikaz(String... parametry) {
-        if (plan.getAktualniProstor().getJeHrabatelny() == true) {
+        if (plan.getAktualniProstor().getJeHrabatelny()) {
             plan.getAktualniProstor().setJeTamJidlo(true);
             plan.getAktualniProstor().setJeHrabatelny(false);
             return "Vyhrabal jsi mrtvou veverku. Pochutnej si. " + plan.getAktualniProstor().dlouhyPopis();

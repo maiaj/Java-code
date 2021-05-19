@@ -2,6 +2,11 @@ package logika.prikazy;
 
 import logika.HerniPlan;
 
+/*
+Prikaz stekej umoznuje psovi vratit se v kterekoli fazi hry zpatky do kotce.
+Zaroven se mu navysi stav jidla a vody na pocatecni hodnotu.
+ */
+
 public class PrikazStekej implements IPrikaz {
     private static final String NAZEV = "stekej";
     private HerniPlan plan;
@@ -13,13 +18,15 @@ public class PrikazStekej implements IPrikaz {
     @Override
     public String provedPrikaz(String... parametry) {
         if (plan.getAktualniProstor().equals(plan.getPocatecniProstor())) {
-            return "Jsi v kotci. Zaštěkal jsi, ale nic to neudělalo.";
+            return "Jsi v kotci. Tady můžeš štěkat kolik chcseš a nic to neudělá.";
         }
         else {
+            plan.resetujHerniPlan();
             plan.setAktualniProstor(plan.getPocatecniProstor());
-            plan.getPes().pridejVodu(2);
-            plan.getPes().pridejJidlo(3);
-            return "Tvoje štěkání přivolalo farmáře, který tě zavezl zpátky na farmu a zavřel tě do kotce. Jsi zase na začátku.";
+            plan.getPes().setVoda(2);
+            plan.getPes().setJidlo(3);
+            return "Tvoje štěkání přivolalo farmáře, který tě zavezl zpátky na farmu a zavřel tě do kotce. Jsi zase na začátku.\n"
+                    + plan.getAktualniProstor().dlouhyPopis();
         }
     }
 

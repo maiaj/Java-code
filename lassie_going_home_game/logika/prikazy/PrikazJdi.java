@@ -4,34 +4,23 @@ import logika.HerniPlan;
 import logika.Prostor;
 import logika.Pruchod;
 
-/**
- * Třída PrikazJdi implementuje pro hru příkaz jdi.
+/*
+ * Prikaz jdi umoznuje psovi vejít do zadaného prostoru. Pokud prostor
+ * existuje, vstoupí se do nového prostoru. Pokud zadaný sousední prostor
+ * (východ) není, vypíše se chybové hlášení.
  */
+
 public class PrikazJdi implements IPrikaz {
     private static final String NAZEV = "jdi";
     private HerniPlan plan;
 
-    /**
-     * Konstruktor třídy
-     *
-     * @param plan herní plán, ve kterém se bude ve hře "chodit"
-     */
     public PrikazJdi(HerniPlan plan) {
         this.plan = plan;
     }
 
-    /**
-     * Provádí příkaz "jdi". Zkouší se vyjít do zadaného prostoru. Pokud prostor
-     * existuje, vstoupí se do nového prostoru. Pokud zadaný sousední prostor
-     * (východ) není, vypíše se chybové hlášení.
-     *
-     * @param parametry - jako  parametr obsahuje jméno prostoru (východu),
-     *                  do kterého se má jít.
-     * @return zpráva, kterou vypíše hra hráči
-     */
     @Override
     public String provedPrikaz(String... parametry) {
-        if (plan.getPes().zjistiStavJidla() == 0) {
+        if (plan.getPes().getJidlo() <= 0) {
             return "Nemáš dost jídla. Najez se nebo zaštěkej a vrátíš se do kotce.";
         } else if (plan.getAktualniProstor().getViditelnePruchody().isEmpty()) {
             return "Tady není žádný viditelný východ.";
@@ -41,31 +30,19 @@ public class PrikazJdi implements IPrikaz {
                 return "Kam mám jít? Musíš zadat jméno východu";
             } else {
                 String nazevCilovehoProstoru = parametry[0];
-
-
                 Pruchod moznyPruchod = plan.getAktualniProstor().vratMoznyPruchod(nazevCilovehoProstoru);
-
                 if (moznyPruchod == null) {
-                    return "Tam se odsud jít nedá 1!";
+                    return "Tam se odsud jít nedá!";
                 }
-
                 Prostor cilovyProstor = moznyPruchod.getCilovyProstor();
-
                 plan.setAktualniProstor(cilovyProstor);
                 plan.getPes().uberJidlo();
                 return cilovyProstor.dlouhyPopis();
-
-
             }
         }
     }
 
 
-    /**
-     * Metoda vrací název příkazu (slovo které používá hráč pro jeho vyvolání)
-     *
-     * @ return nazev prikazu
-     */
     @Override
     public String getNazev() {
         return NAZEV;

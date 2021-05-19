@@ -10,9 +10,6 @@ import uiText.TextoveRozhrani;
 /*******************************************************************************
  * Třída  Start je hlavní třídou projektu,
  * který představuje jednoduchou textovou adventuru určenou k dalším úpravám a rozšiřování
- *
- * @author    Jarmila Pavlíčková
- * @version   ZS 2016/2017
  */
 public class Start
 {

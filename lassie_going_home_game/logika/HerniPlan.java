@@ -13,21 +13,19 @@ public class HerniPlan {
     private Prostor konecnyProstor;
     private Pes pes;
 
-    /**
-     * Konstruktor který vytváří jednotlivé prostory a propojuje je pomocí východů.
-     * Jako výchozí aktuální prostor nastaví halu.
-     */
-    public HerniPlan() {
-
+    public HerniPlan(Pes pes) {
         zalozProstoryHry();
-        pes = new Pes(3, 2, false, false);
+        this.pes = pes;
     }
 
-    /**
+    public HerniPlan() {
+        this(new Pes(3, 2));
+    }
+
+    /*
      * Vytváří jednotlivé prostory a propojuje je pomocí východů.
-     * Jako výchozí aktuální prostor nastaví domeček.
      */
-    private void zalozProstoryHry() {
+    public void zalozProstoryHry() {
         // vytvářejí se jednotlivé prostory
         Prostor kotec = new Prostor("kotec", "kotec, do kterého tě zavřel farmář. Podlaha kotce je z hlíny.", false, false, false);
         Prostor staj = new Prostor("stáj", "stáj, ve které je miska s vodou, jídlo a tvůj starý obojek. U dveří stáje stojí farmářka.", true, true, false);
@@ -43,14 +41,12 @@ public class HerniPlan {
         Prostor staveniste = new Prostor("staveniště", "staveniště, na kterém hoří. Přes kouř nevidíš co je dál.", false, false, false);
         Prostor domov = new Prostor("domov", "domov, jsi v cíli, čekají tě zde prémiové psí dobroty, vychlazená voda, měkký pelíšek a hlavně zasloužené vítězství.", false, false, false);
 
-
         // přiřazují se průchody mezi prostory (sousedící prostory)
         kotec.setPruchod(new Pruchod(false, true, staj));
 
         dvur.setPruchod(new Pruchod(true, false, parkoviste));
         dvur.setPruchod(new Pruchod(true, false, hospoda));
         dvur.setPruchod(new Pruchod(true, false, staveniste));
-
 
         staj.setPruchod(new Pruchod(true, false, kotec));
         staj.setPruchod(new Pruchod(false, false, dvur));
@@ -88,33 +84,25 @@ public class HerniPlan {
         pole2.vlozVec(new Vec("klacek", true));
         pole3.vlozVec(new Vec("klacek", true));
 
-        staveniste.vlozVec(new Vec( "ohen", false));
+        staveniste.vlozVec(new Vec("ohen", false));
 
         // vkládají se do prostoru postavy
-        staj.setPostava(new Postava("farmarka", "farmářka", true, true, false, false));
-        parkoviste.setPostava(new Postava("ridic", "řidič", true, false, false, true));
-        domov.setPostava(new Postava("ridic", "řidič", true, false, false, true));
-        hospoda.setPostava(new Postava("hospodska", "hospodská", true, false, true, false));
+        staj.setPostava(new Postava("farmarka", "farmářka", true, Schopnosti.odtajnujeVychod));
+        parkoviste.setPostava(new Postava("ridic", "řidič", true, Schopnosti.zavezeDoCile));
+        domov.setPostava(new Postava("ridic", "řidič", true, Schopnosti.zavezeDoCile));
+        hospoda.setPostava(new Postava("hospodska", "hospodská", true, Schopnosti.davaJidloAVodu));
 
-
-        // určuje se aktuální a počáteční prostor
+        // určuje se aktuální, počáteční a konecny prostor
         aktualniProstor = kotec;
         pocatecniProstor = kotec;  // hra začíná v kotci
         konecnyProstor = domov; //hra končí doma
     }
-
-    /**
-     * Metoda vrací odkaz na aktuální prostor, ve ktetém se hráč právě nachází.
-     *
-     * @return aktuální prostor
-     */
 
     public Prostor getAktualniProstor() {
         return aktualniProstor;
     }
 
     public Prostor getPocatecniProstor() {
-
         return pocatecniProstor;
     }
 
@@ -122,16 +110,20 @@ public class HerniPlan {
         return konecnyProstor;
     }
 
-    /**
-     * Metoda nastaví aktuální prostor, používá se nejčastěji při přechodu mezi prostory
-     *
-     * @param prostor nový aktuální prostor
-     */
     public void setAktualniProstor(Prostor prostor) {
-        aktualniProstor = prostor;
+        this.aktualniProstor = prostor;
+    }
+
+    public void setPocatecniProstor(Prostor pocatecniProstor) {
+        this.pocatecniProstor = pocatecniProstor;
     }
 
     public Pes getPes() {
         return pes;
     }
+
+    public void resetujHerniPlan() {
+        zalozProstoryHry();
+    }
+
 }

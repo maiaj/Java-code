@@ -3,18 +3,14 @@ package logika;
 public class Postava {
     private String jmeno;
     private String popis;
-    private boolean fungujiPsiOci; // TODO: przerobic na enum
-    private boolean odtajnujeVychod;
-    private boolean davaJidloAVodu;
-    private boolean zavezeDoCile;
+    private boolean fungujiPsiOci;
+    private Schopnosti schopnosti;
 
-    public Postava(String jmeno, String popis, Boolean fungujiPsiOci, boolean odtajnujeVychod, boolean davaJidloAVodu, boolean zavezeDoCile) {
+    public Postava(String jmeno, String popis, Boolean fungujiPsiOci, Schopnosti schopnosti) {
         this.jmeno = jmeno;
         this.popis = popis;
         this.fungujiPsiOci = fungujiPsiOci;
-        this.odtajnujeVychod = odtajnujeVychod;
-        this.davaJidloAVodu = davaJidloAVodu;
-        this.zavezeDoCile = zavezeDoCile;
+        this.schopnosti = schopnosti;
     }
 
     public String getJmeno() {
@@ -29,15 +25,7 @@ public class Postava {
         return fungujiPsiOci;
     }
 
-    public boolean isOdtajnujeVychod() {
-        return odtajnujeVychod;
-    }
-
-    public boolean isDavaJidloAVodu() {
-        return davaJidloAVodu;
-    }
-
-    public boolean isZavezeDoCile() {
-        return zavezeDoCile;
+    public Schopnosti getSchopnosti() {
+        return schopnosti;
     }
 }

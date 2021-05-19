@@ -88,11 +88,6 @@ public class Prostor {
      * Metoda equals pro porovnání dvou prostorů. Překrývá se metoda equals ze
      * třídy Object. Dva prostory jsou shodné, pokud mají stejný název. Tato
      * metoda je důležitá z hlediska správného fungování seznamu východů (Set).
-     * <p>
-     * Bližší popis metody equals je u třídy Object.
-     *
-     * @param o object, který se má porovnávat s aktuálním
-     * @return hodnotu true, pokud má zadaný prostor stejný název, jinak false
      */
     @Override
     public boolean equals(Object o) {
@@ -203,7 +198,7 @@ public class Prostor {
 
     public Collection<Pruchod> getTajnePruchody() {
         return Collections.unmodifiableCollection(pruchody.stream().filter(pruchod -> pruchod.isJeViditelny() == false).collect(Collectors.toList()));
-    } // TODO: zmiynic po wzoru getVychody, przemianowac vychod na pruchod
+    }
 
 
     public boolean obsahujeVec(String nazev) {

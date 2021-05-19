@@ -9,9 +9,6 @@ import static org.junit.Assert.*;
 /*******************************************************************************
  * Testovací třída ProstorTest slouží ke komplexnímu otestování
  * třídy Prostor
- *
- * @author    Jarmila Pavlíčková
- * @version   pro skolní rok 2016/2017
  */
 public class ProstorTest
 {
@@ -48,11 +45,15 @@ public class ProstorTest
      */
     @Test
     public  void testLzeProjit() {		
-        Prostor prostor1 = new Prostor("hala", "vstupní hala budovy VŠE na Jižním městě", false, false, false);
-        Prostor prostor2 = new Prostor("bufet", "bufet, kam si můžete zajít na svačinku", true, true, false);
+        Prostor prostor1 = new Prostor("kotec", "kotec, do kterého tě zavřel farmář.", false, false, false);
+        Prostor prostor2 = new Prostor("stáj", "stáj, ve které je miska s vodou, jídlo a tvůj starý obojek.", true, true, false);
+        Prostor prostor3 = new Prostor("dvůr", "dvůr s jídlem.", true, true, false);
+        Prostor prostor4 = new Prostor("pole", "pole s klackem.", true, true, false);
         prostor1.setPruchod(new Pruchod(true, true, prostor2));
-        prostor2.setPruchod(new Pruchod(true, true, prostor1));
-        assertEquals(prostor2, prostor1.vratMoznyPruchod("bufet"));
+        prostor3.setPruchod(new Pruchod(false, true, prostor4));
+        prostor2.setPruchod(new Pruchod(true, true, prostor1)); // otestujeme neviditelny pruchod
+        assertEquals(prostor2, prostor1.vratMoznyPruchod("stáj").getCilovyProstor());
+        assertEquals(null, prostor3.vratMoznyPruchod("pole"));
         assertEquals(null, prostor2.vratMoznyPruchod("pokoj"));
     }
 

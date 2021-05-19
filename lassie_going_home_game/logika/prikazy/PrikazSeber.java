@@ -12,30 +12,27 @@ public class PrikazSeber implements IPrikaz {
 
     @Override
     public String provedPrikaz(String... parametry) {
-          if (parametry.length == 0) {
+        if (parametry.length == 0) {
             return "Co mám sebrat? Zadej název věci, která je v prostoru.";
-        } else {
+        }
+        else {
             String vecVProstoru = parametry[0];
-            if (parametry.length == 1 && vecVProstoru.equals("klacek") && plan.getAktualniProstor().obsahujeVec(vecVProstoru)) {
-                if (plan.getPes().isMaKlacek() == true) {
-                    return "Už jeden klacek máš.";
+            if (parametry.length != 1 || !vecVProstoru.equals("klacek") || !plan.getAktualniProstor().obsahujeVec(vecVProstoru)) {
+                if (parametry.length != 1 || !vecVProstoru.equals("obojek") || !plan.getAktualniProstor().obsahujeVec(vecVProstoru)) {
+                    return "Tento předmět neznám.";
                 }
-                else {
-                    plan.getPes().setMaKlacek(true);
-                    return "Sebral jsi klacek.";
-                }
-            } else if (parametry.length == 1 && vecVProstoru.equals("obojek") && plan.getAktualniProstor().obsahujeVec(vecVProstoru)) {
-                if (plan.getPes().isMaObojek() == true) {
-                    return "Obojek už máš.";
-                }
-                else {
+                if (plan.getPes().isMaObojek() != true) {
                     plan.getPes().setMaObojek(true);
                     return "Sebral jsi obojek.";
-                }          }
+                }
+                return "Obojek už máš.";
+            } else if (plan.getPes().isMaKlacek() == true) {
+                return "Už jeden klacek máš.";
+            }
+            plan.getPes().setMaKlacek(true);
+            return "Sebral jsi klacek.";
         }
-        return "Tento předmět neznám.";
     }
-
 
     @Override
     public String getNazev() {

@@ -9,9 +9,6 @@ import static org.junit.Assert.*;
 /*******************************************************************************
  * Testovací třída SeznamPrikazuTest slouží ke komplexnímu otestování třídy  
  * SeznamPrikazu
- * 
- * @author    Luboš Pavlíček
- * @version   pro školní rok 2016/2017
  */
 public class SeznamPrikazuTest
 {
