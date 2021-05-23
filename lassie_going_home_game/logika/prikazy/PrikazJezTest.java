@@ -11,7 +11,7 @@ public class PrikazJezTest {
   @Test
   public void testNeprijmeJidloKdyzJePesPlny() {
     // arrange
-    Pes plnyPes = new Pes(10, 3);
+    Pes plnyPes = new Pes(Pes.MAX_JIDLO, 3);
     HerniPlan herniPlan = new HerniPlan(plnyPes);
     IPrikaz prikazJez = new PrikazJez(herniPlan);
 
@@ -50,7 +50,7 @@ public class PrikazJezTest {
 
     // assert
     assertEquals(4, pes.getJidlo());
-    assertEquals(false, prostor.getJeTamJidlo());
+    assertEquals(false, prostor.getMaJidlo());
     assertEquals("Máš 4 jednotek jídla.", vysledek);
   }
 }

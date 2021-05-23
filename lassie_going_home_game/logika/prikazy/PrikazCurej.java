@@ -17,25 +17,25 @@ public class PrikazCurej implements IPrikaz {
 
   @Override
   public String provedPrikaz(String... parametry) {
-    if (plan.getPes().getVoda() <= 0) {
+    if (this.plan.getPes().getVoda() <= 0) {
       return "Nemáš dost vody. Napij se.";
     }
 
-    if (plan.getAktualniProstor().obsahujeVec("ohen")) {
-      if (!plan.getPes().muzeHasit()) {
+    if (this.plan.getAktualniProstor().obsahujeVec("ohen")) {
+      if (!this.plan.getPes().muzeHasit()) {
         return "Nemáš dost vody na to, abys oheň uhasil.";
       }
-      plan.getAktualniProstor().odeberVec("ohen");
-      plan.getPes().hasit();
-      plan.getAktualniProstor().getTajnePruchody().forEach(pruchod -> pruchod.setJeViditelny(true));
+      this.plan.getAktualniProstor().odeberVec("ohen");
+      this.plan.getPes().hasit();
+      this.plan.getAktualniProstor().getTajnePruchody().forEach(pruchod -> pruchod.setJeViditelny(true));
       return "Hurá! Uhasil si oheň! Konečně vidíš co je na druhé straně staveniště. "
-          + plan.getAktualniProstor().popisVychodu();
+          + this.plan.getAktualniProstor().popisVychodu();
     } else {
-      if (plan.getAktualniProstor().isJeOznaceny()) {
+      if (this.plan.getAktualniProstor().jeOznaceny()) {
         return "Tady už jsi byl.";
       }
-      plan.getAktualniProstor().setJeOznaceny(true);
-      plan.getPes().uberVodu(1);
+      this.plan.getAktualniProstor().setJeOznaceny(true);
+      this.plan.getPes().uberVodu(1);
       return "Označkoval sis tento prostor. Příště tak poznáš, že už jsi tady byl.";
     }
   }

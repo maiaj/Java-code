@@ -16,11 +16,11 @@ public class PrikazSeber implements IPrikaz {
       return "Co mám sebrat? Zadej název věci, která je v prostoru.";
     }
     String nazevVeci = parametry[0];
-    if (!plan.getAktualniProstor().obsahujeSebratelouVec(nazevVeci)) {
+    if (!this.plan.getAktualniProstor().obsahujeSebratelouVec(nazevVeci)) {
       return "Tento předmět neznám.";
     }
-    if (plan.getPes().seberVec(nazevVeci)) {
-      plan.getAktualniProstor().odeberVec(nazevVeci);
+    if (this.plan.getPes().seberVec(nazevVeci)) {
+      this.plan.getAktualniProstor().odeberVec(nazevVeci);
       return "Sebral jsi " + nazevVeci + ".";
     }
     return nazevVeci + " už máš.";

@@ -18,7 +18,7 @@ public class PrikazJdiTest {
     IPrikaz prikazJdi = new PrikazJdi(herniPlan);
 
     // act
-    String vysledek = prikazJdi.provedPrikaz();
+    String vysledek = prikazJdi.provedPrikaz("test prostor");
 
     // assert
     assertEquals("Nemáš dost jídla. Najez se nebo zaštěkej a vrátíš se do kotce.", vysledek);
@@ -37,9 +37,32 @@ public class PrikazJdiTest {
     IPrikaz prikazJdi = new PrikazJdi(herniPlan);
 
     // act
-    String vysledek = prikazJdi.provedPrikaz();
+    String vysledek = prikazJdi.provedPrikaz("test nazev 1");
 
     // assert
     assertEquals("Tady není žádný viditelný východ.", vysledek);
   }
+
+  @Test
+  public void testPesJde() {
+    // arrange
+    HerniPlan herniPlan = new HerniPlan();
+    Prostor prostor1 = new Prostor("test nazev 1", "test popis", false, true, false);
+    Prostor prostor2 = new Prostor("test nazev 2", "test popis", false, true, false);
+    herniPlan.setAktualniProstor(prostor1);
+    herniPlan
+        .getAktualniProstor()
+        .setPruchod(new Pruchod(true, true, prostor2)); // v prostoru je neviditelny pruchod
+    IPrikaz prikazJdi = new PrikazJdi(herniPlan);
+
+    // act
+    String vysledek = prikazJdi.provedPrikaz("test nazev 2");
+
+    // assert
+    assertEquals(
+        "Jsi v prostoru test popis.\n"
+            + "Nejsou zde žádné viditelné východy.. Máš 4 jednotek jídla a 4 jednotek vody.",
+        vysledek);
+  }
+
 }

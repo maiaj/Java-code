@@ -4,8 +4,6 @@ package logika;
 
 /** Rozhraní které musí implementovat hra, je na ně navázáno uživatelské rozhraní */
 public interface IHra {
-  // == VEŘEJNÉ KONSTANTY =====================================================
-  // == DEKLAROVANÉ METODY ====================================================
 
   /**
    * Vrátí úvodní zprávu pro hráče.
@@ -26,7 +24,7 @@ public interface IHra {
    *
    * @return vrací true, pokud hra skončila
    */
-  boolean konecHry();
+  boolean getKonecHry();
 
   /**
    * Metoda zpracuje řetězec uvedený jako parametr, rozdělí ho na slovo příkazu a další parametry.
@@ -37,15 +35,4 @@ public interface IHra {
    * @return vrací se řetězec, který se má vypsat na obrazovku
    */
   String zpracujPrikaz(String radek);
-
-  /**
-   * Metoda vrátí odkaz na herní plán, je využita hlavně v testech, kde se jejím prostřednictvím
-   * získává aktualní místnost hry.
-   *
-   * @return odkaz na herní plán
-   */
-  HerniPlan getHerniPlan();
-
-  // == ZDĚDĚNÉ METODY ========================================================
-  // == INTERNÍ DATOVÉ TYPY ===================================================
 }

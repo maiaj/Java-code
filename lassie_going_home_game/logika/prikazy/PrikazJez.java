@@ -16,16 +16,16 @@ public class PrikazJez implements IPrikaz {
 
   @Override
   public String provedPrikaz(String... parametry) {
-    if (!plan.getPes().muzeJestePrijmoutJidlo()) {
+    if (!this.plan.getPes().muzeJestePrijmoutJidlo()) {
       return "Jídla už máš dost.";
     }
-    if (!plan.getAktualniProstor().getJeTamJidlo()) {
+    if (!this.plan.getAktualniProstor().getMaJidlo()) {
       return "Tady nic k snědku není.";
     }
 
-    plan.getPes().pridejJidlo(1);
-    plan.getAktualniProstor().setJeTamJidlo(false);
-    return "Máš " + plan.getPes().getJidlo() + " jednotek jídla.";
+    this.plan.getPes().pridejJidlo(1);
+    this.plan.getAktualniProstor().setMaJidlo(false);
+    return "Máš " + this.plan.getPes().getJidlo() + " jednotek jídla.";
   }
 
   @Override

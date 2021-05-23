@@ -10,10 +10,10 @@ public class Vec {
   }
 
   public String getNazev() {
-    return nazev;
+    return this.nazev;
   }
 
-  public boolean isJdeSebrat() {
-    return jdeSebrat;
+  public boolean jdeSebrat() {
+    return this.jdeSebrat;
   }
 }

@@ -47,21 +47,21 @@ public class Hra implements IHra {
 
   /** Vrátí úvodní zprávu pro hráče. */
   public String vratUvitani() {
-    return "Vítejte!\n"
+    return "Vítej!\n"
         + "Toto je příběh o fence Lassie, která se chce vrátit domů.\n"
-        + "Napište 'nápověda', pokud si nevíte rady, jak hrát dál.\n"
+        + "Napiš 'napoveda', pokud si nevíš rady, jak hrát dál.\n"
         + "\n"
         + herniPlan.getAktualniProstor().dlouhyPopis();
   }
 
   /** Vrátí závěrečnou zprávu pro hráče. */
   public String vratEpilog() {
-    return "Dík, že jste si zahráli.  Ahoj.";
+    return "Dík, že sis zahrál!";
   }
 
   /** Vrací true, pokud hra skončila. */
-  public boolean konecHry() {
-    return konecHry;
+  public boolean getKonecHry() {
+    return konecHry || herniPlan.getAktualniProstor().equals(herniPlan.getKonecnyProstor());
   }
 
   /**

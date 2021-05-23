@@ -1,5 +1,6 @@
 package logika.prikazy;
 
+import java.util.Optional;
 import logika.HerniPlan;
 import logika.Prostor;
 import logika.Pruchod;
@@ -20,29 +21,32 @@ public class PrikazJdi implements IPrikaz {
 
   @Override
   public String provedPrikaz(String... parametry) {
-    if (plan.getPes().getJidlo() <= 0) {
+    if (parametry.length == 0) {
+      // pokud chybí druhé slovo (sousední prostor), tak ....
+      return "Kam mám jít? Musíš zadat jméno východu";
+    }
+    if (this.plan.getPes().getJidlo() <= 0) {
       return "Nemáš dost jídla. Najez se nebo zaštěkej a vrátíš se do kotce.";
-    } else if (plan.getAktualniProstor().getViditelnePruchody().isEmpty()) {
+    } else if (this.plan.getAktualniProstor().getViditelnePruchody().isEmpty()) {
       return "Tady není žádný viditelný východ.";
+    }
+    String nazevCilovehoProstoru = parametry[0];
+    Optional<Pruchod> moznyPruchod = this.plan.getAktualniProstor().vratMoznyPruchod(nazevCilovehoProstoru);
+    if (moznyPruchod.isEmpty()) {
+      return "Tam se odsud jít nedá!";
+    }
+    Prostor cilovyProstor = moznyPruchod.get().getCilovyProstor();
+    this.plan.setAktualniProstor(cilovyProstor);
+    this.plan.getPes().uberJidlo();
+    if (cilovyProstor.equals(this.plan.getKonecnyProstor())) {
+      return this.plan.getKonecnyProstor().getPopis();
     } else {
-      if (parametry.length == 0) {
-        // pokud chybí druhé slovo (sousední prostor), tak ....
-        return "Kam mám jít? Musíš zadat jméno východu";
-      } else {
-        String nazevCilovehoProstoru = parametry[0];
-        Pruchod moznyPruchod = plan.getAktualniProstor().vratMoznyPruchod(nazevCilovehoProstoru);
-        if (moznyPruchod == null) {
-          return "Tam se odsud jít nedá!";
-        }
-        Prostor cilovyProstor = moznyPruchod.getCilovyProstor();
-        plan.setAktualniProstor(cilovyProstor);
-        plan.getPes().uberJidlo();
-        if (cilovyProstor.equals(plan.getKonecnyProstor())) {
-          return plan.getKonecnyProstor().getPopis();
-        } else {
-          return cilovyProstor.dlouhyPopis();
-        }
-      }
+      return cilovyProstor.dlouhyPopis()
+          + ". Máš "
+          + this.plan.getPes().getJidlo()
+          + " jednotek jídla a "
+          + this.plan.getPes().getVoda()
+          + " jednotek vody.";
     }
   }
 

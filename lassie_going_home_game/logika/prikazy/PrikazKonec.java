@@ -32,7 +32,7 @@ public class PrikazKonec implements IPrikaz {
     if (parametry.length > 0) {
       return "Ukončit co? Nechápu, proč jsi zadal druhé slovo.";
     } else {
-      hra.setKonecHry(true);
+      this.hra.setKonecHry(true);
       return "Hra ukončena příkazem konec.";
     }
   }

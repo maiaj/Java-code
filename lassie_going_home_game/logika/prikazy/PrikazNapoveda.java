@@ -33,7 +33,7 @@ public class PrikazNapoveda implements IPrikaz {
         + "po cestě bys měl jíst a pít, abys měl dost síly jít dál.\n"
         + "\n"
         + "Můžeš zadat tyto příkazy:\n"
-        + platnePrikazy.vratNazvyPrikazu();
+        + this.platnePrikazy.vratNazvyPrikazu();
   }
 
   /**

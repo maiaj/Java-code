@@ -3,23 +3,23 @@ package logika;
 public class Postava {
   private final String popis;
   private final boolean fungujiPsiOci;
-  private final Schopnosti schopnosti;
+  private final SchopnostPostavy schopnost;
 
-  public Postava(String popis, Boolean fungujiPsiOci, Schopnosti schopnosti) {
+  public Postava(String popis, Boolean fungujiPsiOci, SchopnostPostavy schopnost) {
     this.popis = popis;
     this.fungujiPsiOci = fungujiPsiOci;
-    this.schopnosti = schopnosti;
+    this.schopnost = schopnost;
   }
 
   public String getPopis() {
-    return popis;
+    return this.popis;
   }
 
   public Boolean getFungujiPsiOci() {
-    return fungujiPsiOci;
+    return this.fungujiPsiOci;
   }
 
-  public Schopnosti getSchopnosti() {
-    return schopnosti;
+  public SchopnostPostavy getSchopnost() {
+    return this.schopnost;
   }
 }

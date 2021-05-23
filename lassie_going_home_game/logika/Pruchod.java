@@ -1,7 +1,7 @@
 package logika;
 
 public class Pruchod {
-  private final boolean jeHrabatelny;
+  private boolean jeHrabatelny;
   private final Prostor cilovyProstor;
   private boolean jeViditelny;
 
@@ -11,8 +11,8 @@ public class Pruchod {
     this.cilovyProstor = cilovyProstor;
   }
 
-  public boolean isJeViditelny() {
-    return jeViditelny;
+  public boolean jeViditelny() {
+    return this.jeViditelny;
   }
 
   public void setJeViditelny(boolean jeViditelny) {
@@ -20,18 +20,19 @@ public class Pruchod {
   }
 
   public boolean prohrabat() {
-    if (!isJeHrabatelny()) {
+    if (!this.jeHrabatelny()) {
       return false;
     }
-    jeViditelny = true;
+    this.jeViditelny = true;
+    this.jeHrabatelny = false;
     return true;
   }
 
-  public boolean isJeHrabatelny() {
-    return jeHrabatelny;
+  public boolean jeHrabatelny() {
+    return this.jeHrabatelny;
   }
 
   public Prostor getCilovyProstor() {
-    return cilovyProstor;
+    return this.cilovyProstor;
   }
 }

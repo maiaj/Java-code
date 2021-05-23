@@ -24,7 +24,7 @@ public class PrikazSeberTest {
     String vysledek = prikazSeber.provedPrikaz("klacek");
 
     // assert
-    assertTrue(herniPlan.getPes().isMaKlacek());
+    assertTrue(herniPlan.getPes().maKlacek());
     assertEquals("Sebral jsi klacek.", vysledek);
   }
 
@@ -43,7 +43,7 @@ public class PrikazSeberTest {
     String vysledek = prikazSeber.provedPrikaz("klacek");
 
     // assert
-    assertTrue(pesSKlackem.isMaKlacek());
+    assertTrue(pesSKlackem.maKlacek());
     assertEquals("klacek už máš.", vysledek);
   }
 }

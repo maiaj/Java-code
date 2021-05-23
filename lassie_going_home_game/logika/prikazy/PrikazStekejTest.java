@@ -3,7 +3,7 @@ package logika.prikazy;
 import static org.junit.Assert.assertEquals;
 
 import logika.HerniPlan;
-import logika.Prostor;
+import logika.Pes;
 import org.junit.Test;
 
 public class PrikazStekejTest {
@@ -27,17 +27,14 @@ public class PrikazStekejTest {
     // arrange
     HerniPlan herniPlan = new HerniPlan();
     IPrikaz prikazStekej = new PrikazStekej(herniPlan);
-    Prostor prostor1 = new Prostor("test nazev1", "test popis", false, false, false);
-    Prostor prostor2 = new Prostor("test nazev2", "test popis", false, false, false);
-    herniPlan.setPocatecniProstor(prostor1);
-    herniPlan.setAktualniProstor(prostor2);
+    herniPlan.zalozProstoryHry();
 
     // act
     prikazStekej.provedPrikaz();
 
     // assert
-    assertEquals(3, herniPlan.getPes().getJidlo());
-    assertEquals(2, herniPlan.getPes().getVoda());
-    assertEquals(prostor1, herniPlan.getAktualniProstor());
+    assertEquals(Pes.DEFAULT_JIDLO, herniPlan.getPes().getJidlo());
+    assertEquals(Pes.DEFAULT_VODA, herniPlan.getPes().getVoda());
+    assertEquals("kotec", herniPlan.getAktualniProstor().getNazev());
   }
 }

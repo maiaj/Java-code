@@ -17,15 +17,13 @@ public class PrikazStekej implements IPrikaz {
 
   @Override
   public String provedPrikaz(String... parametry) {
-    if (plan.getAktualniProstor().equals(plan.getPocatecniProstor())) {
+    if (this.plan.getAktualniProstor().equals(this.plan.getPocatecniProstor())) {
       return "Jsi v kotci. Tady můžeš štěkat kolik chcseš a nic to neudělá.";
     } else {
-      plan.resetujHerniPlan();
-      plan.setAktualniProstor(plan.getPocatecniProstor());
-      plan.getPes().setVoda(2);
-      plan.getPes().setJidlo(3);
+      this.plan.resetujHerniPlan();
+      this.plan.getPes().resetujJidloAVodu();
       return "Tvoje štěkání přivolalo farmáře, který tě zavezl zpátky na farmu a zavřel tě do kotce. Jsi zase na začátku.\n"
-          + plan.getAktualniProstor().dlouhyPopis();
+          + this.plan.getAktualniProstor().dlouhyPopis();
     }
   }
 

@@ -1,8 +1,9 @@
 package logika.prikazy;
 
 import logika.HerniPlan;
+import logika.Postava;
 import logika.Pruchod;
-import logika.Schopnosti;
+import logika.SchopnostPostavy;
 
 public class PrikazPsiOci implements IPrikaz {
   private static final String NAZEV = "oci";
@@ -14,41 +15,36 @@ public class PrikazPsiOci implements IPrikaz {
 
   @Override
   public String provedPrikaz(String... parametry) {
-    if (plan.getAktualniProstor().getPostava() == null
-        || !plan.getAktualniProstor().getPostava().getFungujiPsiOci()) {
+    Postava postava = this.plan.getAktualniProstor().getPostava();
+    if (postava == null || !postava.getFungujiPsiOci()) {
       return "Tady ti psí oči nepomůžou.";
     }
-    if (plan.getAktualniProstor()
-        .getPostava()
-        .getSchopnosti()
-        .equals(Schopnosti.ODTAJNUJE_VYCHOD)) {
-      for (Pruchod pruchod : plan.getAktualniProstor().getTajnePruchody()) {
+    if (postava.getSchopnost().equals(SchopnostPostavy.ODTAJNUJE_VYCHOD)) {
+      for (Pruchod pruchod : this.plan.getAktualniProstor().getTajnePruchody()) {
         pruchod.setJeViditelny(true);
-        plan.getAktualniProstor().setPruchod(pruchod);
         return "Tvoje psí oči zabraly, "
-            + plan.getAktualniProstor().getPostava().getPopis()
-            + " tě podrbe za uchem a pustí tě ven! "
-            + plan.getAktualniProstor().dlouhyPopis();
+            + postava.getPopis()
+            + " tě podrbe za uchem a můžeš jít ven! "
+            + this.plan.getAktualniProstor().dlouhyPopis();
       }
-    } else if (plan.getAktualniProstor()
-        .getPostava()
-        .getSchopnosti()
-        .equals(Schopnosti.ZAVEZE_DO_CILE)) {
-      if (plan.getPes().isMaObojek()) {
-        plan.setAktualniProstor(plan.getKonecnyProstor());
-        return "Výborně, řidič se podívá na tvůj obojek, na kterém máš svou starou adresu a zaveze tě domů.\n "
-            + plan.getKonecnyProstor().getPopis();
+      return "Žádný tajný průchod už tady není.";
+    } else if (postava.getSchopnost().equals(SchopnostPostavy.ZAVEZE_DO_CILE)) {
+      if (this.plan.getPes().maObojek()) {
+        this.plan.setAktualniProstor(this.plan.getKonecnyProstor());
+        return "Výborně, řidič se podívá na tvůj obojek, na kterém máš svou starou adresu a zaveze tě domů.\n"
+            + this.plan.getKonecnyProstor().getPopis();
+      } else {
+        this.plan.getAktualniProstor().setMaJidlo(true);
+        return "Bohužel nemáš obojek s adresou. "
+            + postava.getPopis()
+            + " neví, co s tebou, dá ti svou svačinu, kterou můžeš sníst a nechá tě být.";
       }
-      plan.getAktualniProstor().setJeTamJidlo(true);
-      return "Bohužel nemáš obojek s adresou. "
-          + plan.getAktualniProstor().getPostava().getPopis()
-          + " neví, co s tebou, dá ti svou svačinu a nechá tě být.";
+    } else if (postava.getSchopnost().equals(SchopnostPostavy.DAVA_JIDLO_A_VODU)) {
+      this.plan.getAktualniProstor().setMaJidlo(true);
+      this.plan.getAktualniProstor().setMaVodu(true);
+      return "Máš štěstí, " + postava.getPopis() + " tí dá něco k snědku a vodu.";
     }
-    plan.getAktualniProstor().setJeTamJidlo(true);
-    plan.getAktualniProstor().setJeTamVoda(true);
-    return "Máš štěstí, "
-        + plan.getAktualniProstor().getPostava().getPopis()
-        + " tě nakrmí a dá ti vodu.";
+    throw new RuntimeException("Neznámá schopnost.");
   }
 
   @Override

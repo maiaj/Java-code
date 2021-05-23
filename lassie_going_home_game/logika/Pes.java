@@ -4,85 +4,88 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Pes {
-  private final int maxJidlo = 10;
-  private final int maxVoda = 10;
+  public static final int MAX_JIDLO = 10;
+  public static final int MAX_VODA = 10;
+  public static final int DEFAULT_JIDLO = 5;
+  public static final int DEFAULT_VODA = 4;
   private final Set<String> sebraneVeci = new HashSet<>();
   private int jidlo;
   private int voda;
+
+  public Pes() {
+    this(DEFAULT_JIDLO, DEFAULT_VODA);
+  }
 
   public Pes(int jidlo, int voda) {
     this.jidlo = jidlo;
     this.voda = voda;
   }
 
-  public int getMaxVoda() {
-    return maxVoda;
+  public boolean maKlacek() {
+    return this.sebraneVeci.contains("klacek");
   }
 
-  public boolean isMaKlacek() {
-    return sebraneVeci.contains("klacek");
-  }
-
-  public boolean isMaObojek() {
-    return sebraneVeci.contains("obojek");
+  public boolean maObojek() {
+    return this.sebraneVeci.contains("obojek");
   }
 
   public int getJidlo() {
-    return this.jidlo;
-  }
-
-  public void setJidlo(int jidlo) {
-    this.jidlo = jidlo;
+    return jidlo;
   }
 
   public int getVoda() {
-    return this.voda;
-  }
-
-  public void setVoda(int voda) {
-    this.voda = voda;
+    return voda;
   }
 
   public void pridejJidlo(int jednotka) {
-    if (this.jidlo + jednotka > this.maxJidlo) {
-      return;
-    }
-    this.jidlo = this.jidlo + jednotka;
+    jidlo = Math.min(jidlo + jednotka, MAX_JIDLO);
   }
 
   public void uberJidlo() {
-    if (this.jidlo <= 0) {
+    if (jidlo <= 0) {
       return;
     }
-    this.jidlo--;
+    jidlo--;
   }
 
   public void pridejVodu(int jednotka) {
-    if (this.voda + jednotka > this.maxVoda) {
-      return;
-    }
-    this.voda = this.voda + jednotka;
+    voda = Math.min(voda + jednotka, MAX_VODA);
   }
 
   public void uberVodu(int jednotka) {
-    if (this.voda >= jednotka) {
-      this.voda = this.voda - jednotka;
+    if (voda >= jednotka) {
+      voda = voda - jednotka;
+    } else {
+      voda = 0;
     }
   }
 
   public boolean muzeJestePrijmoutJidlo() {
-    return this.jidlo < this.maxJidlo;
+    return jidlo < MAX_JIDLO;
+  }
+
+  public boolean muzeJestePrijmoutVodu() {
+    return voda < MAX_VODA;
   }
 
   public boolean muzeHasit() {
-    return !isMaKlacek() && this.voda >= 10 || isMaKlacek() && this.voda >= 5;
+    return voda >= this.getVodaPotrebnaKHaseni();
   }
 
   public void hasit() {
-    uberVodu(isMaKlacek() ? 5 : 10);
+    this.uberVodu(this.getVodaPotrebnaKHaseni());
+  }
+
+  private int getVodaPotrebnaKHaseni() {
+    return this.maKlacek() ? 5 : 10;
   }
 
   public boolean seberVec(String nazevVeci) {
-    return sebraneVeci.add(nazevVeci);
+    return this.sebraneVeci.add(nazevVeci);
+  }
+
+  public void resetujJidloAVodu() {
+    jidlo = DEFAULT_JIDLO;
+    voda = DEFAULT_VODA;
   }
 }

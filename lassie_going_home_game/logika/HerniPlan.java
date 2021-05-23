@@ -11,13 +11,16 @@ public class HerniPlan {
   private Prostor pocatecniProstor;
   private Prostor konecnyProstor;
 
-  public HerniPlan(Pes pes) {
-    zalozProstoryHry();
-    this.pes = pes;
+  public HerniPlan() {
+    this(new Pes());
   }
 
-  public HerniPlan() {
-    this(new Pes(5, 2));
+  /*
+   * Druhý konstruktor vyrvořen pro účely testování, aby bylo možné předávat custom vytvořeného psa.
+   */
+  public HerniPlan(Pes pes) {
+    this.zalozProstoryHry();
+    this.pes = pes;
   }
 
   /*
@@ -46,7 +49,7 @@ public class HerniPlan {
             true,
             true,
             false);
-    Prostor cesta = new Prostor("cesta", "cesta vde dvěma směry.", false, false, false);
+    Prostor cesta = new Prostor("cesta", "cesta vede dvěma směry.", false, false, false);
     Prostor parkoviste =
         new Prostor(
             "parkoviště",
@@ -54,8 +57,8 @@ public class HerniPlan {
             false,
             false,
             false);
-    Prostor les1 = new Prostor("les", "hluboký les s pramenem vody.", true, true, true);
-    Prostor les2 = new Prostor("háj", "malý lesík s pár stromy.", false, true, true);
+    Prostor les1 = new Prostor("les", "hluboký les s pramenem vody.", true, false, true);
+    Prostor les2 = new Prostor("háj", "malý lesík s pár stromy.", false, false, true);
     Prostor pole1 =
         new Prostor(
             "pole", "suché, neúrodné pole, na kterém se dá najít klacek.", false, false, false);
@@ -64,7 +67,11 @@ public class HerniPlan {
             "louka", "suché, neúrodné pole, na kterém se dá najít klacek.", false, false, false);
     Prostor pole3 =
         new Prostor(
-            "pole", "suché, neúrodné pole, na kterém se dá najít klacek.", false, false, false);
+            "suché_pole",
+            "suché, neúrodné pole, na kterém se dá najít klacek.",
+            false,
+            false,
+            false);
     Prostor hospoda =
         new Prostor("hospoda", "hospoda u lesa. Za barem stojí hospodská.", false, false, false);
     Prostor staveniste =
@@ -123,41 +130,37 @@ public class HerniPlan {
     staveniste.vlozVec(new Vec("ohen", false));
 
     // vkládají se do prostoru postavy
-    staj.setPostava(new Postava("farmářka", true, Schopnosti.ODTAJNUJE_VYCHOD));
-    parkoviste.setPostava(new Postava("řidič", true, Schopnosti.ZAVEZE_DO_CILE));
-    hospoda.setPostava(new Postava("hospodská", true, Schopnosti.DAVA_JIDLO_A_VODU));
+    staj.setPostava(new Postava("farmářka", true, SchopnostPostavy.ODTAJNUJE_VYCHOD));
+    parkoviste.setPostava(new Postava("řidič", true, SchopnostPostavy.ZAVEZE_DO_CILE));
+    hospoda.setPostava(new Postava("hospodská", true, SchopnostPostavy.DAVA_JIDLO_A_VODU));
 
     // určuje se aktuální, počáteční a konecny prostor
-    aktualniProstor = kotec;
-    pocatecniProstor = kotec; // hra začíná v kotci
-    konecnyProstor = domov; // hra končí doma
+    this.aktualniProstor = kotec;
+    this.pocatecniProstor = kotec; // hra začíná v kotci
+    this.konecnyProstor = domov; // hra končí doma
   }
 
   public Prostor getAktualniProstor() {
-    return aktualniProstor;
+    return this.aktualniProstor;
   }
 
   public void setAktualniProstor(Prostor prostor) {
-    this.aktualniProstor = prostor;
+    aktualniProstor = prostor;
   }
 
   public Prostor getPocatecniProstor() {
-    return pocatecniProstor;
-  }
-
-  public void setPocatecniProstor(Prostor pocatecniProstor) {
-    this.pocatecniProstor = pocatecniProstor;
+    return this.pocatecniProstor;
   }
 
   public Prostor getKonecnyProstor() {
-    return konecnyProstor;
+    return this.konecnyProstor;
   }
 
   public Pes getPes() {
-    return pes;
+    return this.pes;
   }
 
   public void resetujHerniPlan() {
-    zalozProstoryHry();
+    this.zalozProstoryHry();
   }
 }

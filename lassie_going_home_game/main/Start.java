@@ -11,11 +11,7 @@ import uiText.TextoveRozhrani;
  * který představuje jednoduchou textovou adventuru určenou k dalším úpravám a rozšiřování
  */
 public class Start {
-  /***************************************************************************
-   * Metoda, prostřednictvím níž se spouští celá aplikace.
-   *
-   * @param args Parametry příkazového řádku
-   */
+
   public static void main(String[] args) {
 
     IHra hra = new Hra();

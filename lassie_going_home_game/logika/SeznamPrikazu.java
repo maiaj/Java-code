@@ -24,7 +24,7 @@ public class SeznamPrikazu {
    * @param prikaz Instance třídy implementující rozhraní IPrikaz
    */
   public void vlozPrikaz(IPrikaz prikaz) {
-    mapaSPrikazy.put(prikaz.getNazev(), prikaz);
+    this.mapaSPrikazy.put(prikaz.getNazev(), prikaz);
   }
 
   /**
@@ -35,7 +35,7 @@ public class SeznamPrikazu {
    * @return instance třídy, která provede požadovaný příkaz
    */
   public IPrikaz vratPrikaz(String nazevPrikazu) {
-    return mapaSPrikazy.getOrDefault(nazevPrikazu, null);
+    return this.mapaSPrikazy.get(nazevPrikazu);
   }
 
   /**
@@ -45,7 +45,7 @@ public class SeznamPrikazu {
    * @return Vrací hodnotu true, pokud je zadaný řetězec přípustný příkaz
    */
   public boolean jePlatnyPrikaz(String nazevPrikazu) {
-    return mapaSPrikazy.containsKey(nazevPrikazu);
+    return this.mapaSPrikazy.containsKey(nazevPrikazu);
   }
 
   /**
@@ -54,6 +54,6 @@ public class SeznamPrikazu {
    * @return Řetězec, který obsahuje seznam přípustných příkazů
    */
   public String vratNazvyPrikazu() {
-    return String.join(" ", mapaSPrikazy.keySet());
+    return String.join(" ", this.mapaSPrikazy.keySet());
   }
 }

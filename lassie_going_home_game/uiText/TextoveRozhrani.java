@@ -13,7 +13,6 @@ public class TextoveRozhrani {
   private static final String PROMPT = "> ";
   private final IHra hra;
 
-  /** Vytváří hru. */
   public TextoveRozhrani(IHra hra) {
     this.hra = hra;
   }
@@ -24,29 +23,33 @@ public class TextoveRozhrani {
    */
   public void hraj() {
     System.out.println(
-        "Výstup ze hry se ti automaticky zapíše do souboru. Zadej název souboru (default je output.txt): ");
-    String soubor = prectiString();
-    if (soubor.isEmpty()) {
-      soubor = "output.txt";
-    }
-    ZapisDoSouboru.zapisRadek(soubor, hra.vratUvitani());
-    System.out.println(hra.vratUvitani());
+        "Výstup ze hry se ti automaticky zapíše do souboru. Zadej cestu k souboru (default je output.txt): ");
+    String soubor = this.prectiNazevSouboru();
+    ZapisDoSouboru.zapisRadek(soubor, this.hra.vratUvitani());
+    System.out.println(this.hra.vratUvitani());
 
     // základní cyklus programu - opakovaně se čtou příkazy a poté
     // se provádějí do konce hry.
 
-    while (!hra.konecHry()) {
-      String radek = prectiString();
+    while (!this.hra.getKonecHry()) {
+      String radek = this.prectiString();
       ZapisDoSouboru.zapisRadek(soubor, PROMPT + radek);
-      String vysledek = hra.zpracujPrikaz(radek);
+      String vysledek = this.hra.zpracujPrikaz(radek);
       ZapisDoSouboru.zapisRadek(soubor, vysledek);
       System.out.println(vysledek);
     }
 
-    ZapisDoSouboru.zapisRadek(soubor, hra.vratEpilog());
-    System.out.println(hra.vratEpilog());
+    ZapisDoSouboru.zapisRadek(soubor, this.hra.vratEpilog());
+    System.out.println(this.hra.vratEpilog());
   }
 
+  private String prectiNazevSouboru() {
+    String soubor = this.prectiString();
+    if (soubor.isEmpty()) {
+      soubor = "output.txt";
+    }
+    return soubor;
+  }
   /**
    * Metoda přečte příkaz z příkazového řádku
    *

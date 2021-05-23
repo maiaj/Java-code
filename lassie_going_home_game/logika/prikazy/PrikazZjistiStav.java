@@ -12,13 +12,23 @@ public class PrikazZjistiStav implements IPrikaz {
 
   @Override
   public String provedPrikaz(String... parametry) {
+    String oznaceni;
+    if (this.plan.getAktualniProstor().jeOznaceny()) {
+      oznaceni = " Tady uz jis byl.";
+    } else {
+      oznaceni = " Tady jsi ještě nebyl.";
+    }
+
     return "Jsi v prostoru "
-        + plan.getAktualniProstor().getNazev()
-        + ". Máš "
-        + plan.getPes().getJidlo()
+        + this.plan.getAktualniProstor().getNazev()
+        + "."
+        + oznaceni
+        + " Máš "
+        + this.plan.getPes().getJidlo()
         + " jednotek jídla a "
-        + plan.getPes().getVoda()
-        + " jednotek vody.";
+        + this.plan.getPes().getVoda()
+        + " jednotek vody.\n"
+        + this.plan.getAktualniProstor().popisVychodu();
   }
 
   @Override

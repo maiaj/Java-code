@@ -19,18 +19,17 @@ public class PrikazHrabej implements IPrikaz {
 
   @Override
   public String provedPrikaz(String... parametry) {
-    if (plan.getAktualniProstor().getJeHrabatelny()) {
-      plan.getAktualniProstor().setJeTamJidlo(true);
-      plan.getAktualniProstor().setJeHrabatelny(false);
+    if (this.plan.getAktualniProstor().getJeHrabatelny()) {
+      this.plan.getAktualniProstor().setMaJidlo(true);
+      this.plan.getAktualniProstor().setJeHrabatelny(false);
       return "Vyhrabal jsi mrtvou veverku. Pochutnej si. "
-          + plan.getAktualniProstor().dlouhyPopis();
+          + this.plan.getAktualniProstor().dlouhyPopis();
     } else {
-      for (Pruchod pruchod : plan.getAktualniProstor().getTajnePruchody()) {
+      for (Pruchod pruchod : this.plan.getAktualniProstor().getTajnePruchody()) {
         if (pruchod.prohrabat()) {
-          plan.getAktualniProstor().setPruchod(pruchod);
-          return "Podařilo se ti vyhrabat dost velkou díru. Dobrá práce! "
+          return "Podařilo se ti vyhrabat dost velkou díru. Dobrá práce, můžeš jít dál! "
               + "\n"
-              + plan.getAktualniProstor().popisVychodu();
+              + this.plan.getAktualniProstor().popisVychodu();
         }
       }
     }

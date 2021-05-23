@@ -34,11 +34,11 @@ public class PrikazHrabejTest {
     String vysledek = prikazHrabej.provedPrikaz();
 
     // assert
-    assertEquals(true, herniPlan.getAktualniProstor().getJeTamJidlo());
+    assertEquals(true, herniPlan.getAktualniProstor().getMaJidlo());
     assertEquals(false, herniPlan.getAktualniProstor().getJeHrabatelny());
     assertEquals(
         "Vyhrabal jsi mrtvou veverku. Pochutnej si. Jsi v prostoru test popis.\n"
-            + "Východy: Nejsou zde žádné viditelné východy.",
+            + "Nejsou zde žádné viditelné východy.",
         vysledek);
   }
 
@@ -74,7 +74,8 @@ public class PrikazHrabejTest {
 
     // assert
     assertEquals(
-        "Podařilo se ti vyhrabat dost velkou díru. Dobrá práce! \n" + "Východy: test nazev 2",
+        "Podařilo se ti vyhrabat dost velkou díru. Dobrá práce, můžeš jít dál! \n"
+            + "Východy: test nazev 2",
         vysledek);
   }
 }

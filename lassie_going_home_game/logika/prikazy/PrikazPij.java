@@ -12,17 +12,16 @@ public class PrikazPij implements IPrikaz {
 
   @Override
   public String provedPrikaz(String... parametry) {
-    if (plan.getPes().getVoda() < plan.getPes().getMaxVoda()) {
-      if (plan.getAktualniProstor().getJeTamVoda()) {
-        plan.getPes().pridejVodu(1);
-        plan.getAktualniProstor().setJeTamVoda(false);
-        return "Máš " + plan.getPes().getVoda() + " jednotek vody.";
-      } else {
-        return "Tady se bohužel ničeho nenapiješ.";
-      }
-    } else {
+    if (!this.plan.getPes().muzeJestePrijmoutVodu()) {
       return "Vody už máš dost.";
     }
+    if (!this.plan.getAktualniProstor().getMaVodu()) {
+      return "Tady nic k pití není.";
+    }
+
+    this.plan.getPes().pridejVodu(1);
+    this.plan.getAktualniProstor().setMaVodu(false);
+    return "Máš " + this.plan.getPes().getVoda() + " jednotek vody.";
   }
 
   @Override
