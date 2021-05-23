@@ -3,8 +3,8 @@
 package main;
 
 
-
-import logika.*;
+import logika.Hra;
+import logika.IHra;
 import uiText.TextoveRozhrani;
 
 /*******************************************************************************

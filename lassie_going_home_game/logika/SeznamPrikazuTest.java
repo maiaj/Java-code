@@ -4,7 +4,8 @@ import logika.prikazy.PrikazJdi;
 import logika.prikazy.PrikazKonec;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertEquals;
 
 /*******************************************************************************
  * Testovací třída SeznamPrikazuTest slouží ke komplexnímu otestování třídy  

@@ -12,7 +12,7 @@ import logika.Pruchod;
 
 public class PrikazJdi implements IPrikaz {
     private static final String NAZEV = "jdi";
-    private HerniPlan plan;
+    private final HerniPlan plan;
 
     public PrikazJdi(HerniPlan plan) {
         this.plan = plan;
@@ -37,11 +37,14 @@ public class PrikazJdi implements IPrikaz {
                 Prostor cilovyProstor = moznyPruchod.getCilovyProstor();
                 plan.setAktualniProstor(cilovyProstor);
                 plan.getPes().uberJidlo();
-                return cilovyProstor.dlouhyPopis();
+                if (cilovyProstor.equals(plan.getKonecnyProstor())) {
+                    return plan.getKonecnyProstor().getPopis();
+                } else {
+                    return cilovyProstor.dlouhyPopis();
+                }
             }
         }
     }
-
 
     @Override
     public String getNazev() {

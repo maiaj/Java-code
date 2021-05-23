@@ -1,20 +1,18 @@
 package logika;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Pes {
     private int jidlo;
     private int voda;
-    private int maxJidlo = 10;
-    private int maxVoda = 10;
-    private boolean maKlacek = false;
-    private boolean maObojek = false;
+    private final int maxJidlo = 10;
+    private final int maxVoda = 10;
+    private final Set<String> sebraneVeci = new HashSet<>();
 
     public Pes(int jidlo, int voda) {
         this.jidlo = jidlo;
         this.voda = voda;
-    }
-
-    public int getMaxJidlo() {
-        return maxJidlo;
     }
 
     public int getMaxVoda() {
@@ -22,11 +20,11 @@ public class Pes {
     }
 
     public boolean isMaKlacek() {
-        return maKlacek;
+        return sebraneVeci.contains("klacek");
     }
 
     public boolean isMaObojek() {
-        return maObojek;
+        return sebraneVeci.contains("obojek");
     }
 
     public int getJidlo() {
@@ -51,7 +49,7 @@ public class Pes {
     }
 
     public void pridejVodu(int jednotka) {
-        if (this.voda > this.maxVoda) {
+        if (this.voda > this.maxVoda) { // TODO je mozne pridat nad max
             return;
         }
         this.voda = this.voda + jednotka;
@@ -72,16 +70,11 @@ public class Pes {
     }
 
     public void hasit() {
-        uberVodu(!isMaKlacek() ? 10 : 5);
+        uberVodu(isMaKlacek() ? 5 : 10);
     }
 
-
-    public void setMaKlacek(boolean maKlacek) {
-        this.maKlacek = maKlacek;
-    }
-
-    public void setMaObojek(boolean maObojek) {
-        this.maObojek = maObojek;
+    public boolean seberVec(String nazevVeci) {
+        return sebraneVeci.add(nazevVeci);
     }
 
     public void setJidlo(int jidlo) {

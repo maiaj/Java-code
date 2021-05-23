@@ -4,7 +4,7 @@ import logika.HerniPlan;
 
 public class PrikazPij implements IPrikaz {
     private static final String NAZEV = "pij";
-    private HerniPlan plan;
+    private final HerniPlan plan;
 
     public PrikazPij(HerniPlan plan) {
         this.plan = plan;
@@ -13,7 +13,7 @@ public class PrikazPij implements IPrikaz {
     @Override
     public String provedPrikaz(String... parametry) {
         if (plan.getPes().getVoda() < plan.getPes().getMaxVoda()) {
-            if (plan.getAktualniProstor().getJeTamVoda() == true) {
+            if (plan.getAktualniProstor().getJeTamVoda()) {
                 plan.getPes().pridejVodu(1);
                 plan.getAktualniProstor().setJeTamVoda(false);
                 return "Máš " + plan.getPes().getVoda() + " jednotek vody.";

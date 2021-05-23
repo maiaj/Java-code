@@ -1,9 +1,13 @@
 package logika.prikazy;
 
-import logika.*;
+import logika.HerniPlan;
+import logika.Pes;
+import logika.Prostor;
+import logika.Pruchod;
+import logika.Vec;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class PrikazCurejTest {
 
@@ -97,7 +101,7 @@ public class PrikazCurejTest {
     public void testPesUhasiOhenSKlackem() {
         // arrange
         Pes pesSVodou = new Pes(3, 7);
-        pesSVodou.setMaKlacek(true);
+        pesSVodou.seberVec("klacek");
         HerniPlan herniPlan = new HerniPlan(pesSVodou);
         Prostor prostor1 = new Prostor("test nazev 1", "test popis", false, true, false);
         Prostor prostor2 = new Prostor("test nazev 2", "test popis", false, false, false);

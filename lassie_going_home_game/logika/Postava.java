@@ -1,20 +1,14 @@
 package logika;
 
 public class Postava {
-    private String jmeno;
-    private String popis;
-    private boolean fungujiPsiOci;
-    private Schopnosti schopnosti;
+    private final String popis;
+    private final boolean fungujiPsiOci;
+    private final Schopnosti schopnosti;
 
-    public Postava(String jmeno, String popis, Boolean fungujiPsiOci, Schopnosti schopnosti) {
-        this.jmeno = jmeno;
+    public Postava(String popis, Boolean fungujiPsiOci, Schopnosti schopnosti) {
         this.popis = popis;
         this.fungujiPsiOci = fungujiPsiOci;
         this.schopnosti = schopnosti;
-    }
-
-    public String getJmeno() {
-        return jmeno;
     }
 
     public String getPopis() {

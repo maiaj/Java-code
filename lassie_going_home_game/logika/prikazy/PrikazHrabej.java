@@ -11,7 +11,7 @@ nebo na pruchod, ktery je hrabatelny (v tomto pripade pes odtajnuje pruchod, kte
 
 public class PrikazHrabej implements IPrikaz {
     private static final String NAZEV = "hrabej";
-    private HerniPlan plan;
+    private final HerniPlan plan;
 
     public PrikazHrabej(HerniPlan plan) {
         this.plan = plan;

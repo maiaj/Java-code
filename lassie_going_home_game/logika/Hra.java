@@ -1,6 +1,19 @@
 package logika;
 
-import logika.prikazy.*;
+import logika.prikazy.IPrikaz;
+import logika.prikazy.PrikazCurej;
+import logika.prikazy.PrikazHrabej;
+import logika.prikazy.PrikazJdi;
+import logika.prikazy.PrikazJez;
+import logika.prikazy.PrikazKonec;
+import logika.prikazy.PrikazNapoveda;
+import logika.prikazy.PrikazPij;
+import logika.prikazy.PrikazPsiOci;
+import logika.prikazy.PrikazSeber;
+import logika.prikazy.PrikazStekej;
+import logika.prikazy.PrikazZjistiStav;
+
+import java.util.Arrays;
 
 /**
  * Třída Hra - třída představující logiku adventury.
@@ -11,10 +24,9 @@ import logika.prikazy.*;
  */
 
 public class Hra implements IHra {
-    private SeznamPrikazu platnePrikazy;    // obsahuje seznam přípustných příkazů
-    private HerniPlan herniPlan;
-    private boolean konecHry = false;
-    private Pes pes;
+    private final SeznamPrikazu platnePrikazy;    // obsahuje seznam přípustných příkazů
+    private final HerniPlan herniPlan;
+    private boolean konecHry;
 
     /**
      * Vytváří hru a inicializuje místnosti (prostřednictvím třídy HerniPlan) a seznam platných příkazů.
@@ -72,18 +84,13 @@ public class Hra implements IHra {
     public String zpracujPrikaz(String radek) {
         String[] slova = radek.split("[ \t]+");
         String slovoPrikazu = slova[0];
-        String[] parametry = new String[slova.length - 1];
-        for (int i = 0; i < parametry.length; i++) {
-            parametry[i] = slova[i + 1];
+        if (!platnePrikazy.jePlatnyPrikaz(slovoPrikazu)) {
+            return "Nevím co tím myslíš? Tento příkaz neznám. ";
         }
-        String textKVypsani = " .... ";
-        if (platnePrikazy.jePlatnyPrikaz(slovoPrikazu)) {
-            IPrikaz prikaz = platnePrikazy.vratPrikaz(slovoPrikazu);
-            textKVypsani = prikaz.provedPrikaz(parametry);
-        } else {
-            textKVypsani = "Nevím co tím myslíš? Tento příkaz neznám. ";
-        }
-        return textKVypsani;
+
+        String[] parametry = Arrays.stream(slova).skip(1).toArray(String[]::new);
+        IPrikaz prikaz = platnePrikazy.vratPrikaz(slovoPrikazu);
+        return prikaz.provedPrikaz(parametry);
     }
 
 

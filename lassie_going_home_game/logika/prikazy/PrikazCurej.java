@@ -9,7 +9,7 @@ nebo k oznaceni prostoru za ucelem udrzovani prehledu o tom, kde uz pes byl.
 
 public class PrikazCurej implements IPrikaz {
     private static final String NAZEV = "curej";
-    private HerniPlan plan;
+    private final HerniPlan plan;
 
     public PrikazCurej(HerniPlan plan) {
         this.plan = plan;

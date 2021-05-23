@@ -1,8 +1,8 @@
 package logika;
 
 public class Vec {
-    private String nazev;
-    private boolean jdeSebrat;
+    private final String nazev;
+    private final boolean jdeSebrat;
 
 
     public Vec(String nazev, boolean jdeSebrat) {

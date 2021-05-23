@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
  */
 public class SeznamPrikazu {
     // mapa pro uložení přípustných příkazů
-    private Map<String, IPrikaz> mapaSPrikazy = new HashMap<>();
+    private final Map<String, IPrikaz> mapaSPrikazy = new HashMap<>();
 
     /**
      * Vkládá nový příkaz.
@@ -59,7 +59,7 @@ public class SeznamPrikazu {
      * @return Řetězec, který obsahuje seznam přípustných příkazů
      */
     public String vratNazvyPrikazu() {
-        return mapaSPrikazy.keySet().stream().collect(Collectors.joining(" "));
+        return String.join(" ", mapaSPrikazy.keySet());
     }
 
 }

@@ -14,15 +14,15 @@ import java.util.stream.Collectors;
  */
 public class Prostor {
 
-    private String nazev;
-    private String popis;
+    private final String nazev;
+    private final String popis;
     private Boolean jeTamVoda;
     private Boolean jeTamJidlo;
     private Boolean jeHrabatelny;
-    private Set<Pruchod> pruchody;
-    private Map<String, Vec> veci;
+    private final Set<Pruchod> pruchody;
+    private final Map<String, Vec> veci;
     private Postava postava;
-    private boolean jeOznaceny = false;
+    private boolean jeOznaceny;
 
     /**
      * Vytvoření prostoru se zadaným popisem, např. "kuchyň", "hala", "trávník
@@ -40,7 +40,6 @@ public class Prostor {
         this.jeHrabatelny = jeHrabatelny;
         pruchody = new HashSet<>();
         veci = new HashMap<>();
-        this.postava = postava;
     }
 
     public Boolean getJeTamVoda() {
@@ -99,14 +98,14 @@ public class Prostor {
         if (!(o instanceof Prostor)) {
             return false;    // pokud parametr není typu Prostor, vrátíme false
         }
-        // přetypujeme parametr na typ Prostor 
+        // přetypujeme parametr na typ Prostor
         Prostor druhy = (Prostor) o;
 
         //metoda equals třídy java.util.Objects porovná hodnoty obou názvů. 
         //Vrátí true pro stejné názvy a i v případě, že jsou oba názvy null,
         //jinak vrátí false.
 
-        return (java.util.Objects.equals(this.nazev, druhy.nazev));
+        return java.util.Objects.equals(this.nazev, druhy.nazev);
     }
 
     /**
@@ -124,15 +123,12 @@ public class Prostor {
         return vysledek;
     }
 
-
-    /**
-     * Vrací název prostoru (byl zadán při vytváření prostoru jako parametr
-     * konstruktoru)
-     *
-     * @return název prostoru
-     */
     public String getNazev() {
         return nazev;
+    }
+
+    public String getPopis() {
+        return this.popis;
     }
 
     /**
@@ -197,20 +193,23 @@ public class Prostor {
     }
 
     public Collection<Pruchod> getTajnePruchody() {
-        return Collections.unmodifiableCollection(pruchody.stream().filter(pruchod -> pruchod.isJeViditelny() == false).collect(Collectors.toList()));
+        return Collections.unmodifiableCollection(pruchody.stream().filter(pruchod -> !pruchod.isJeViditelny()).collect(Collectors.toList()));
     }
-
 
     public boolean obsahujeVec(String nazev) {
         return veci.containsKey(nazev);
+    }
+
+    public boolean obsahujeSebratelouVec(String nazev) {
+        return veci.containsKey(nazev) && veci.get(nazev).isJdeSebrat();
     }
 
     public void vlozVec(Vec vec) {
         veci.put(vec.getNazev(), vec);
     }
 
-    public Vec odeberVec(String nazev) {
-        return veci.remove(nazev);
+    public void odeberVec(String nazev) {
+        veci.remove(nazev);
     }
 
     public void setPostava(Postava postava) {

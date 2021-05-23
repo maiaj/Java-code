@@ -8,7 +8,7 @@ Jidlo je potreba k tomu, aby pes mohl chodit. Kazdy prikaz jez pridava 1 jednotk
 
 public class PrikazJez implements IPrikaz {
     private static final String NAZEV = "jez";
-    private HerniPlan plan;
+    private final HerniPlan plan;
 
     public PrikazJez(HerniPlan plan) {
         this.plan = plan;

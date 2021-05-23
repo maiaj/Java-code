@@ -2,8 +2,8 @@ package logika;
 
 public class Pruchod {
     private boolean jeViditelny;
-    private boolean jeHrabatelny;
-    private Prostor cilovyProstor;
+    private final boolean jeHrabatelny;
+    private final Prostor cilovyProstor;
 
     public Pruchod(boolean jeViditelny, boolean jeHrabatelny, Prostor cilovyProstor) {
         this.jeViditelny = jeViditelny;

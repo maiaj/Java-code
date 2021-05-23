@@ -4,7 +4,7 @@ import logika.HerniPlan;
 
 public class PrikazZjistiStav implements IPrikaz {
     private static final String NAZEV = "stav";
-    private HerniPlan plan;
+    private final HerniPlan plan;
 
     public PrikazZjistiStav(HerniPlan plan) {
         this.plan = plan;

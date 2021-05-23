@@ -6,7 +6,8 @@ import logika.Prostor;
 import logika.Vec;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class PrikazSeberTest {
 
@@ -31,7 +32,7 @@ public class PrikazSeberTest {
     public void testNesebereDalsiVecStejnehoTypu() {
         // arrange
         Pes pesSKlackem = new Pes(3, 2);
-        pesSKlackem.setMaKlacek(true);
+        pesSKlackem.seberVec("klacek");
         HerniPlan herniPlan = new HerniPlan(pesSKlackem);
         Prostor prostor = new Prostor("test nazev", "test popis", false, true, false);
         prostor.vlozVec(new Vec("klacek", true));
@@ -43,7 +44,7 @@ public class PrikazSeberTest {
 
         // assert
         assertTrue(pesSKlackem.isMaKlacek());
-        assertEquals("Už jeden klacek máš.", vysledek);
+        assertEquals("klacek už máš.", vysledek);
     }
 
 }

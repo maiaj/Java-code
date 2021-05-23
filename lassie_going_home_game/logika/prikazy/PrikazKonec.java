@@ -12,7 +12,7 @@ public class PrikazKonec implements IPrikaz {
 
     private static final String NAZEV = "konec";
 
-    private Hra hra;
+    private final Hra hra;
 
     /**
      *  Konstruktor třídy

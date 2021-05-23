@@ -1,11 +1,10 @@
 package logika.prikazy;
 
 import logika.HerniPlan;
-import logika.Pes;
 import logika.Prostor;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class PrikazStekejTest {
 

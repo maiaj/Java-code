@@ -9,7 +9,7 @@ Zaroven se mu navysi stav jidla a vody na pocatecni hodnotu.
 
 public class PrikazStekej implements IPrikaz {
     private static final String NAZEV = "stekej";
-    private HerniPlan plan;
+    private final HerniPlan plan;
 
     public PrikazStekej(HerniPlan plan) {
         this.plan = plan;

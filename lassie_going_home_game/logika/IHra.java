@@ -14,21 +14,21 @@ public interface IHra {
      *
      * @return vrací se řetězec, který se má vypsat na obrazovku
      */
-    public String vratUvitani();
+    String vratUvitani();
 
     /**
      * Vrátí závěrečnou zprávu pro hráče.
      *
      * @return vrací se řetězec, který se má vypsat na obrazovku
      */
-    public String vratEpilog();
+    String vratEpilog();
 
     /**
      * Vrací informaci o tom, zda hra již skončila, je jedno zda výhrou, prohrou nebo příkazem konec.
      *
      * @return vrací true, pokud hra skončila
      */
-    public boolean konecHry();
+    boolean konecHry();
 
     /**
      * Metoda zpracuje řetězec uvedený jako parametr, rozdělí ho na slovo příkazu a další parametry.
@@ -38,7 +38,7 @@ public interface IHra {
      * @param radek text, který zadal uživatel jako příkaz do hry.
      * @return vrací se řetězec, který se má vypsat na obrazovku
      */
-    public String zpracujPrikaz(String radek);
+    String zpracujPrikaz(String radek);
 
 
     /**
@@ -47,7 +47,7 @@ public interface IHra {
      *
      * @return odkaz na herní plán
      */
-    public HerniPlan getHerniPlan();
+    HerniPlan getHerniPlan();
 
     //== ZDĚDĚNÉ METODY ========================================================
     //== INTERNÍ DATOVÉ TYPY ===================================================

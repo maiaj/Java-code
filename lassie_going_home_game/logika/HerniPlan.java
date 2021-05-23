@@ -11,7 +11,7 @@ public class HerniPlan {
     private Prostor aktualniProstor;
     private Prostor pocatecniProstor;
     private Prostor konecnyProstor;
-    private Pes pes;
+    private final Pes pes;
 
     public HerniPlan(Pes pes) {
         zalozProstoryHry();
@@ -19,7 +19,7 @@ public class HerniPlan {
     }
 
     public HerniPlan() {
-        this(new Pes(3, 2));
+        this(new Pes(5, 2));
     }
 
     /*
@@ -36,18 +36,13 @@ public class HerniPlan {
         Prostor les2 = new Prostor("háj", "malý lesík s pár stromy.", false, true, true);
         Prostor pole1 = new Prostor("pole", "suché, neúrodné pole, na kterém se dá najít klacek.", false, false, false);
         Prostor pole2 = new Prostor("louka", "suché, neúrodné pole, na kterém se dá najít klacek.", false, false, false);
-        Prostor pole3 = new Prostor("políčko", "suché, neúrodné pole, na kterém se dá najít klacek.", false, false, false);
+        Prostor pole3 = new Prostor("pole", "suché, neúrodné pole, na kterém se dá najít klacek.", false, false, false);
         Prostor hospoda = new Prostor("hospoda", "hospoda u lesa. Za barem stojí hospodská.", false, false, false);
         Prostor staveniste = new Prostor("staveniště", "staveniště, na kterém hoří. Přes kouř nevidíš co je dál.", false, false, false);
-        Prostor domov = new Prostor("domov", "domov, jsi v cíli, čekají tě zde prémiové psí dobroty, vychlazená voda, měkký pelíšek a hlavně zasloužené vítězství.", false, false, false);
+        Prostor domov = new Prostor("domov", "Jsi v cíli! Čekají tě zde prémiové psí dobroty, vychlazená voda, měkký pelíšek a hlavně zasloužené vítězství.", false, false, false);
 
         // přiřazují se průchody mezi prostory (sousedící prostory)
         kotec.setPruchod(new Pruchod(false, true, staj));
-
-        dvur.setPruchod(new Pruchod(true, false, parkoviste));
-        dvur.setPruchod(new Pruchod(true, false, hospoda));
-        dvur.setPruchod(new Pruchod(true, false, staveniste));
-
         staj.setPruchod(new Pruchod(true, false, kotec));
         staj.setPruchod(new Pruchod(false, false, dvur));
         dvur.setPruchod(new Pruchod(true, false, staj));
@@ -87,10 +82,9 @@ public class HerniPlan {
         staveniste.vlozVec(new Vec("ohen", false));
 
         // vkládají se do prostoru postavy
-        staj.setPostava(new Postava("farmarka", "farmářka", true, Schopnosti.odtajnujeVychod));
-        parkoviste.setPostava(new Postava("ridic", "řidič", true, Schopnosti.zavezeDoCile));
-        domov.setPostava(new Postava("ridic", "řidič", true, Schopnosti.zavezeDoCile));
-        hospoda.setPostava(new Postava("hospodska", "hospodská", true, Schopnosti.davaJidloAVodu));
+        staj.setPostava(new Postava("farmářka", true, Schopnosti.ODTAJNUJE_VYCHOD));
+        parkoviste.setPostava(new Postava("řidič", true, Schopnosti.ZAVEZE_DO_CILE));
+        hospoda.setPostava(new Postava("hospodská", true, Schopnosti.DAVA_JIDLO_A_VODU));
 
         // určuje se aktuální, počáteční a konecny prostor
         aktualniProstor = kotec;

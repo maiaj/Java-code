@@ -1,6 +1,8 @@
 package logika.prikazy;
 
-import logika.*;
+import logika.HerniPlan;
+import logika.Pes;
+import logika.Prostor;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

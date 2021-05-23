@@ -1,9 +1,14 @@
 package logika.prikazy;
 
-import logika.*;
+import logika.HerniPlan;
+import logika.Pes;
+import logika.Postava;
+import logika.Prostor;
+import logika.Pruchod;
+import logika.Schopnosti;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class PrikazPsiOciTest {
     @Test
@@ -20,7 +25,7 @@ public class PrikazPsiOciTest {
         // assert
         assertEquals("Tady ti psí oči nepomůžou.", vysledek);
 
-        prostor1.setPostava(new Postava("postava 1", "postava pro test", false, Schopnosti.odtajnujeVychod));
+        prostor1.setPostava(new Postava("postava pro test", false, Schopnosti.ODTAJNUJE_VYCHOD));
         assertEquals("Tady ti psí oči nepomůžou.", vysledek);
     }
 
@@ -30,7 +35,7 @@ public class PrikazPsiOciTest {
         HerniPlan herniPlan = new HerniPlan();
         Prostor prostor1 = new Prostor("test nazev 1", "test popis", false, false, false);
         Prostor prostor2 = new Prostor("test nazev 2", "test popis", false, false, false);
-        prostor1.setPostava(new Postava("postava 1", "postava pro test", true, Schopnosti.odtajnujeVychod));
+        prostor1.setPostava(new Postava("postava pro test", true, Schopnosti.ODTAJNUJE_VYCHOD));
         prostor1.setPruchod(new Pruchod(false, false, prostor2));
         herniPlan.setAktualniProstor(prostor1);
         IPrikaz prikazPsiOci = new PrikazPsiOci(herniPlan);
@@ -48,7 +53,7 @@ public class PrikazPsiOciTest {
         // arrange
         HerniPlan herniPlan = new HerniPlan();
         Prostor prostor1 = new Prostor("test nazev", "test popis", false, false, false);
-        prostor1.setPostava(new Postava("postava 1", "postava pro test", true, Schopnosti.davaJidloAVodu));
+        prostor1.setPostava(new Postava("postava pro test", true, Schopnosti.DAVA_JIDLO_A_VODU));
         herniPlan.setAktualniProstor(prostor1);
         IPrikaz prikazPsiOci = new PrikazPsiOci(herniPlan);
 
@@ -65,10 +70,10 @@ public class PrikazPsiOciTest {
     public void testPostavaDovezePsaDoCileKdyzMaObojek() {
         // arrange
         Pes pesSObojkem = new Pes(3,2);
-        pesSObojkem.setMaObojek(true);
+        pesSObojkem.seberVec("obojek");
         HerniPlan herniPlan = new HerniPlan(pesSObojkem);
         Prostor prostor1 = new Prostor("test nazev", "test popis", false, false, false);
-        prostor1.setPostava(new Postava("postava 1", "postava pro test", true, Schopnosti.zavezeDoCile));
+        prostor1.setPostava(new Postava("postava pro test", true, Schopnosti.ZAVEZE_DO_CILE));
         herniPlan.setAktualniProstor(prostor1);
         IPrikaz prikazPsiOci = new PrikazPsiOci(herniPlan);
 
@@ -84,7 +89,7 @@ public class PrikazPsiOciTest {
         // arrange
         HerniPlan herniPlan = new HerniPlan();
         Prostor prostor1 = new Prostor("test nazev", "test popis", false, false, false);
-        prostor1.setPostava(new Postava("postava 1", "postava pro test", true, Schopnosti.zavezeDoCile));
+        prostor1.setPostava(new Postava("postava pro test", true, Schopnosti.ZAVEZE_DO_CILE));
         herniPlan.setAktualniProstor(prostor1);
         IPrikaz prikazPsiOci = new PrikazPsiOci(herniPlan);
 
