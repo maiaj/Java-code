@@ -16,6 +16,15 @@ public class PesTest {
     }
 
     @Test
+    public void testPesNepijeANejiKdyzMaPlno() {
+        Pes pes = new Pes(10, 9);
+        pes.pridejVodu(3);
+        pes.pridejJidlo(1);
+        assertEquals(9, pes.getVoda());
+        assertEquals(10, pes.getJidlo());
+    }
+
+    @Test
     public void testPsoviUbyvaJidloAVoda() {
         Pes pes = new Pes(5, 5);
         pes.uberVodu(1);
@@ -23,6 +32,15 @@ public class PesTest {
         pes.uberJidlo();
         assertEquals(4, pes.getVoda());
         assertEquals(4, pes.getJidlo());
-
     }
+
+    @Test
+    public void testPesSeNemuzeDostatDoMinusu() {
+        Pes pes = new Pes(0, 0);
+        pes.uberVodu(1);
+        pes.uberJidlo();
+        assertEquals(0, pes.getVoda());
+        assertEquals(0, pes.getJidlo());
+    }
+
 }

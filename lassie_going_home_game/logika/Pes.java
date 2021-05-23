@@ -36,9 +36,10 @@ public class Pes {
     }
 
     public void pridejJidlo(int jednotka) {
-        if (this.maxJidlo >= this.jidlo) {
-            this.jidlo = this.jidlo + jednotka;
+        if (this.jidlo + jednotka > this.maxJidlo) {
+            return;
         }
+        this.jidlo = this.jidlo + jednotka;
     }
 
     public void uberJidlo() {
@@ -49,7 +50,7 @@ public class Pes {
     }
 
     public void pridejVodu(int jednotka) {
-        if (this.voda > this.maxVoda) { // TODO je mozne pridat nad max
+        if (this.voda + jednotka > this.maxVoda) {
             return;
         }
         this.voda = this.voda + jednotka;

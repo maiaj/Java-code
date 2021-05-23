@@ -156,3 +156,69 @@ Východy: Nejsou zde žádné viditelné východy.
 > hrabej
 Podařilo se ti vyhrabat dost velkou díru. Dobrá práce! 
 Východy: stáj
+Vítejte!
+Toto je příběh o fence Lassie, která se chce vrátit domů.
+Napište 'nápověda', pokud si nevíte rady, jak hrát dál.
+
+Jsi v prostoru kotec, do kterého tě zavřel farmář. Podlaha kotce je z hlíny..
+Východy: Nejsou zde žádné viditelné východy.
+> hrabej
+Podařilo se ti vyhrabat dost velkou díru. Dobrá práce! 
+Východy: stáj
+> jdi stáj
+Jsi v prostoru stáj, ve které je miska s vodou, jídlo a tvůj starý obojek. U dveří stáje stojí farmářka..
+Východy: kotec
+> jez
+Máš 5 jednotek jídla.
+> pij
+Máš 3 jednotek vody.
+> oci
+Tvoje psí oči zabraly, farmářka tě podrbe za uchem a pustí tě ven! Jsi v prostoru stáj, ve které je miska s vodou, jídlo a tvůj starý obojek. U dveří stáje stojí farmářka..
+Východy: kotec dvůr
+> jez
+Tady nic k snědku není.
+> hrabej
+Tady nic nevyhrabeš.
+> jdi dvůr
+Jsi v prostoru dvůr, na kterém je voda a jídlo. Dvůr je ohraničený plotem, za který je slyšet hluk cesty..
+Východy: stáj
+> jez 
+Máš 5 jednotek jídla.
+> pij
+Máš 4 jednotek vody.
+> jdi
+Kam mám jít? Musíš zadat jméno východu
+> 
+Nevím co tím myslíš? Tento příkaz neznám. 
+> 
+Nevím co tím myslíš? Tento příkaz neznám. 
+> hrabej
+Podařilo se ti vyhrabat dost velkou díru. Dobrá práce! 
+Východy: cesta stáj
+> jdi cesta
+Jsi v prostoru cesta vde dvěma směry..
+Východy: parkoviště les dvůr
+> jdi les
+Jsi v prostoru hluboký les s pramenem vody..
+Východy: hospoda cesta louka políčko
+> hrabej 
+Vyhrabal jsi mrtvou veverku. Pochutnej si. Jsi v prostoru hluboký les s pramenem vody..
+Východy: hospoda cesta louka políčko
+> jez
+Máš 4 jednotek jídla.
+> pij
+Máš 5 jednotek vody.
+> jdi políčko
+Jsi v prostoru suché, neúrodné pole, na kterém se dá najít klacek..
+Východy: les hospoda staveniště
+> seber klacek
+Sebral jsi klacek.
+> jdi staveniště
+Jsi v prostoru staveniště, na kterém hoří. Přes kouř nevidíš co je dál..
+Východy: políčko
+> curej
+Hurá! Uhasil si oheň! Konečně vidíš co je na druhé straně staveniště. Východy: políčko domov
+> stav
+Jsi v prostoru staveniště. Máš 2 jednotek jídla a 0 jednotek vody.
+> jdi domov
+Jsi v cíli! Čekají tě zde prémiové psí dobroty, vychlazená voda, měkký pelíšek a hlavně zasloužené vítězství.
